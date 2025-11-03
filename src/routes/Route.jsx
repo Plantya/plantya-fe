@@ -1,0 +1,19 @@
+import React from 'react';
+import { Navigate } from "react-router-dom";
+import { ReactSession } from 'react-client-session';
+
+// Authmiddleware Function
+
+const Authmiddleware = (props) => {
+    debugger
+    if (!ReactSession.get("authUser")) {
+        return (
+            <Navigate to={{ pathname: "/login", state: { from: props.location } }} />
+        )
+    } else {
+        return (
+            <React.Fragment>{props.children}</React.Fragment>
+        )
+    }
+}
+export default Authmiddleware
