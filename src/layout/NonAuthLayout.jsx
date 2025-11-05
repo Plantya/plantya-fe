@@ -14,7 +14,8 @@ const NonAuthLayout = ({ children }) => {
         >
             <div
                 style={{
-                    width: "400px",
+                    height: "80%",
+                    width: "35%",
                     // backgroundColor: "#ffffffff",
                     borderRadius: "12px",
                     padding: "40px",

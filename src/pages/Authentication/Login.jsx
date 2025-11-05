@@ -86,7 +86,7 @@ const Login = () => {
                 text="Memproses login..."
             />
 
-            <Paper elevation={6} sx={{ p: 4, borderRadius: 3, maxWidth: 400, mx: "auto" }}>
+            <Paper elevation={6} sx={{ p: 4, borderRadius: 3, width:'auto', mx: "auto" }}>
 
                 <Typography variant="h5" textAlign="center" fontWeight="bold" mb={3}>
                     Login
