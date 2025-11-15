@@ -5,11 +5,11 @@ const NonAuthLayout = ({ children }) => {
         <div
             style={{
                 width: "100vw",
-                height: "100vh",
+                minHeight: "100vh",
                 display: "flex",
                 justifyContent: "center", // horizontal center
                 alignItems: "center",      // vertical center
-                backgroundColor: "#69a7e5",
+                backgroundColor: "#0E1621", // modern dark blue
             }}
         >
             <div
@@ -17,12 +17,13 @@ const NonAuthLayout = ({ children }) => {
                 style={{
                     height: "80%",
                     width: "35%",
-                    // backgroundColor: "#ffffffff",
                     borderRadius: "12px",
                     padding: "40px",
+                    // backgroundColor: "#1C2733", // card dark
                     // boxShadow: "0 6px 15px rgba(0,0,0,0.3)",
+                    // border: "1px solid #2F3A48", 
+                    // boxShadow: "0 5px 18px rgba(0,0,0,0.4)",
                     color: "white",
-                    display: "flex",
                     flexDirection: "column",
                     justifyContent: "center",
                     alignItems: "center",

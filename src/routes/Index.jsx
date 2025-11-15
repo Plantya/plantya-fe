@@ -4,6 +4,7 @@ import Authmiddleware from "./route";
 import LazyLoadRoutes from "./lazyLoadRoutes";
 import Login from "../pages/Authentication/Login";
 import Logout from "../pages/Authentication/Logout";
+import Register from "../pages/Authentication/Register";
 
 const AuthProtectedRoutes = [
     { path: "/test", component: LazyLoadRoutes(() => import("../pages/app001/Test")) }
@@ -12,7 +13,7 @@ const AuthProtectedRoutes = [
 
 const PublicRoutes = [
     { path: "/login", component: <Login /> },
-    // Register
+    { path: "/register", component: <Register /> },
     { path: "/logout", component: <Logout /> }
 ]
 

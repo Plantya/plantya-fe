@@ -16,7 +16,7 @@ import PageLoading from "../../common/PageLoading";
 import axiosInstance from "../../utils/AxiosInstance";
 import useTextFieldSx from "../../themes/textFieldDark";
 
-const Login = () => {
+const Register = () => {
 
     const navigate = useNavigate();
     const [loadingSpinner, setLoadingSpinner] = useState(false);
@@ -210,4 +210,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;
