@@ -14,6 +14,7 @@ import { ReactSession } from "react-client-session";
 import { useNavigate } from "react-router-dom";
 import PageLoading from "../../common/PageLoading";
 import axiosInstance from "../../utils/AxiosInstance";
+import useTextFieldSx from "../../themes/textFieldDark";
 
 const Login = () => {
 
@@ -86,7 +87,7 @@ const Login = () => {
                 text="Memproses login..."
             />
 
-            <Paper elevation={6} sx={{ p: 4, borderRadius: 3, width:'auto', mx: "auto" }} className="bg-secondary">
+            <Paper elevation={6} sx={{ p: 4, borderRadius: 3, width:'auto', mx: "auto" }}>
 
                 <Typography variant="h5" textAlign="center" fontWeight="bold" mb={3}>
                     Login
@@ -127,12 +128,12 @@ const Login = () => {
                     <Button
                         type="submit"
                         variant="contained"
-                        color="primary"
+                        color="dark"
                         fullWidth
                         sx={{ mt: 3, py: 1.2, borderRadius: 2 }}
                         disabled={formik.isSubmitting}
                     >
-                        {formik.isSubmitting ? "Memproses..." : "Masuk"}
+                        {formik.isSubmitting ? "Processing..." : "Login"}
                     </Button>
                 </Box>
 
