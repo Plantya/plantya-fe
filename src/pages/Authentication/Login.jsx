@@ -8,14 +8,19 @@ import {
     Typography,
     Paper,
     Alert,
-    Snackbar
+    Snackbar,
+    InputAdornment,
+
 } from "@mui/material";
+import { Row } from "reactstrap";
 import { ReactSession } from "react-client-session";
 import { useNavigate } from "react-router-dom";
 import PageLoading from "../../common/PageLoading";
 import axiosInstance from "../../utils/AxiosInstance";
 import useTextFieldSx from "../../themes/textFieldDark";
 import { useAuth } from "../../context/AuthContext";
+import MailOutlineOutlinedIcon from '@mui/icons-material/MailOutlineOutlined';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 const Login = () => {
 
@@ -122,26 +127,37 @@ const Login = () => {
                 sx={{
                     p: 4,
                     height: "auto",
-                    width: "auto",
+                    width: "70%",
                     borderRadius: "16px",
+                    background:'transparent',
                     // backgroundColor: "#1C2733",
-                    border: "1px solid #2F3A48",
-                    boxShadow: "0 5px 18px rgba(0,0,0,0.4)",
-                    color: "white",
+                    // border: "1px solid #2F3A48",
+                    // boxShadow: "0 5px 18px rgba(0,0,0,0.4)",
+                    // color: "white",
                 }}
                 // className="bg-warning"
             >
 
-                <Typography variant="h4" textAlign="center" fontWeight="bold" style={{ }}>
-                    Welcome Back!
-                </Typography>
-                <Typography variant="h6" textAlign="center" mb={3}>
-                    Let's connect your devices.
-                </Typography>
+                <Row className="bg-info">
+                    <Typography variant="h3" textAlign="center" fontWeight="bold" color="#DEF2FF">
+                        Welcome Back!
+                    </Typography>
+                </Row>
+                <Row className="bg-success">
+                    <Typography variant="h5" textAlign="center" fontWeight="light" color="#DEF2FF" className="mb-4">
+                        Let's connect your devices.
+                    </Typography>
+                </Row>
 
-                <Typography variant="h4" textAlign="center" mb={3}>
-                    Sign In
-                </Typography>
+                <Row className="bg-secondary mt-4">
+                    <Typography variant="h5" textAlign="center" mb={3}>
+                        Sign In
+                    </Typography>
+                </Row>
+
+
+
+
 
 
                 <Box
@@ -161,33 +177,80 @@ const Login = () => {
                         {message}
                     </Alert>}
 
+                    <Row className="bg-success">
+                        <Typography
+                            variant="body2"
+                            sx={{
+                                mb: "-4px",        // rapat ke TextField
+                                color: "#000000ff",     // warna label
+                                fontSize: "0.85rem",
+                                fontWeight: 500
+                            }}
+                            className="p-0"
+                        >
+                            Email or Username
+                        </Typography>
+                        <TextField
+                            placeholder="Email or Username"
+                            name="username"
+                            size="small"
+                            fullWidth
+                            margin="normal"
+                            value={formik.values.username}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            error={formik.touched.username && Boolean(formik.errors.username)}
+                            helperText={formik.touched.username && formik.errors.username}
+                            // sx={textFieldDarkSx}
+                            slotProps={{
+                                input: {
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <MailOutlineOutlinedIcon />
+                                        </InputAdornment>
+                                    ),
+                                },
+                            }}
+                        />
+                    </Row>
 
-                    <TextField
-                        label="Username"
-                        name="username"
-                        fullWidth
-                        margin="normal"
-                        value={formik.values.username}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        error={formik.touched.username && Boolean(formik.errors.username)}
-                        helperText={formik.touched.username && formik.errors.username}
-                        sx={textFieldDarkSx}
-                    />
+                    <Row>
+                        <Typography
+                            variant="body2"
+                            sx={{
+                                mb: "-4px",        // rapat ke TextField
+                                color: "#000000ff",     // warna label
+                                fontSize: "0.85rem",
+                                fontWeight: 500
+                            }}
+                        >
+                            Password
+                        </Typography>
+                        <TextField
+                            placeholder="Password"
+                            name="password"
+                            type="password"
+                            size="small"
 
-                    <TextField
-                        label="Password"
-                        name="password"
-                        type="password"
-                        fullWidth
-                        margin="normal"
-                        value={formik.values.password}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        error={formik.touched.password && Boolean(formik.errors.password)}
-                        helperText={formik.touched.password && formik.errors.password}
-                        sx={textFieldDarkSx}
-                    />
+                            fullWidth
+                            margin="normal"
+                            value={formik.values.password}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            error={formik.touched.password && Boolean(formik.errors.password)}
+                            helperText={formik.touched.password && formik.errors.password}
+                            // sx={textFieldDarkSx}
+                            slotProps={{
+                                input: {
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <LockOutlinedIcon />
+                                        </InputAdornment>
+                                    ),
+                                },
+                            }}
+                        />
+                    </Row>
 
                     <Button
                         type="submit"
