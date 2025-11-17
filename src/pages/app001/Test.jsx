@@ -11,7 +11,8 @@ export default function TestBootstrap() {
             >
                 <Row>
                     <Col>
-                        <Alert color="primary">Bootstrap is working! 🎉</Alert>
+                        {/* <Alert color="primary">Tab 🎉</Alert> */}
+                        <Alert color="primary">Graph || Table</Alert>
                         <Button color="success">Test Button</Button>
                     </Col>
                 </Row>

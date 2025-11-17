@@ -23,18 +23,6 @@ const Login = () => {
     const [loadingSpinner, setLoadingSpinner] = useState(false);
     const [message, setMessage] = useState("");
 
-
-    // const handleLogin = (values) => {
-    //     debugger
-    //     if (values.username === "admin" && values.password === "1234") {
-    //         const userData = { username: values.username, token: "dummy-token" };
-    //         ReactSession.set("authUser", userData);
-    //         navigate("/test");
-    //     } else {
-    //         debugger
-    //         setMessage("Username atau password salah!");
-    //     }
-    // }
     const { login } = useAuth();
     const handleLogin = async (values) => {
         debugger
@@ -136,15 +124,23 @@ const Login = () => {
                     height: "auto",
                     width: "auto",
                     borderRadius: "16px",
-                    backgroundColor: "#1C2733",
+                    // backgroundColor: "#1C2733",
                     border: "1px solid #2F3A48",
                     boxShadow: "0 5px 18px rgba(0,0,0,0.4)",
                     color: "white",
                 }}
+                // className="bg-warning"
             >
 
-                <Typography variant="h5" textAlign="center" fontWeight="bold" mb={3}>
-                    Login
+                <Typography variant="h4" textAlign="center" fontWeight="bold" style={{ }}>
+                    Welcome Back!
+                </Typography>
+                <Typography variant="h6" textAlign="center" mb={3}>
+                    Let's connect your devices.
+                </Typography>
+
+                <Typography variant="h4" textAlign="center" mb={3}>
+                    Sign In
                 </Typography>
 
 

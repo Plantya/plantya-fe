@@ -1,37 +1,50 @@
 import React from "react";
+import { Col, Container, Row } from "reactstrap";
 
 const NonAuthLayout = ({ children }) => {
     return (
-        <div
-            style={{
-                width: "100vw",
-                minHeight: "100vh",
-                display: "flex",
-                justifyContent: "center", // horizontal center
-                alignItems: "center",      // vertical center
-                backgroundColor: "#0E1621", // modern dark blue
-            }}
-        >
-            <div
-                className="d-flex flex-column justify-content-center align-items-center p-4 rounded-4"
+        <Container fluid className="p-0 m-0" style={{ height: '100vh' }}>
+
+            <Row lg="12" md="12" sm="12"
+                className="p-0 m-0 d-flex flex-row h-100"
                 style={{
-                    height: "80%",
-                    width: "35%",
-                    borderRadius: "12px",
-                    padding: "40px",
-                    // backgroundColor: "#1C2733", // card dark
-                    // boxShadow: "0 6px 15px rgba(0,0,0,0.3)",
-                    // border: "1px solid #2F3A48", 
-                    // boxShadow: "0 5px 18px rgba(0,0,0,0.4)",
-                    color: "white",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
+                    backgroundColor: "#0F1624", // Main Background
                 }}
             >
-                {children}
-            </div>
-        </div>
+                <Col lg="6" md="6" sm="6"
+                    className="d-flex flex-column justify-content-center align-items-center p-4 h-100"
+                >
+                    {children}
+                </Col>
+
+                <Col lg="6" md="6" sm="6"
+                    className="p-0 position-relative h-100"
+                >
+                    <img
+                        src="/NonAuthBackground.png"
+                        alt="Background"
+                        style={{
+                            width: '100%',
+                            height: '100vh',
+                            objectFit: 'cover'
+                        }}
+                    />
+                    <img
+                        src="/BaseLogo.png"
+                        alt="Logo"
+                        style={{
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            maxWidth: '50%',
+                            height: 'auto',
+                        }}
+                    />
+                </Col>
+
+            </Row>
+        </Container>
     );
 };
 
