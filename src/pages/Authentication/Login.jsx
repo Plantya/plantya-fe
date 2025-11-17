@@ -21,12 +21,27 @@ import useTextFieldSx from "../../themes/textFieldDark";
 import { useAuth } from "../../context/AuthContext";
 import MailOutlineOutlinedIcon from '@mui/icons-material/MailOutlineOutlined';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import IconButton from '@mui/material/IconButton';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const Login = () => {
 
     const navigate = useNavigate();
     const [loadingSpinner, setLoadingSpinner] = useState(false);
     const [message, setMessage] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
+
+    const handleMouseUpPassword = (event) => {
+        event.preventDefault();
+    };
 
     const { login } = useAuth();
     const handleLogin = async (values) => {
@@ -123,8 +138,9 @@ const Login = () => {
                 text="Processing..."
             />
 
-            <Container fluid className="bg-success" style={{ width: '70%' }}>
+            <Container fluid className="" style={{ width: '50%' }}>
                 <Col lg="12" md="12" sm="12" className="justify-content-center">
+
                     <Row className="mb-4" style={{ color: '#DEF2FF' }}>
                         <div className="text-center mb-4">
                             <Typography variant="h3" fontWeight="bold" >
@@ -142,11 +158,11 @@ const Login = () => {
                         </div>
                     </Row>
 
-                    <Row className="bg-warning">
+                    <Row className="d-flex justify-content-center text-white">
                         <Box
                             component="form"
                             onSubmit={formik.handleSubmit}
-                            className=""
+                            className="w-75"
                         >
                             {message && <Alert
                                 severity="error"
@@ -165,8 +181,7 @@ const Login = () => {
                                 <Typography
                                     variant="body2"
                                     sx={{
-                                        mb: "-4px",        // rapat ke TextField
-                                        color: "#000000ff",     // warna label
+                                        mb: "-15px",        // rapat ke TextField
                                         fontSize: "0.85rem",
                                         fontWeight: 500
                                     }}
@@ -185,7 +200,7 @@ const Login = () => {
                                     onBlur={formik.handleBlur}
                                     error={formik.touched.username && Boolean(formik.errors.username)}
                                     helperText={formik.touched.username && formik.errors.username}
-                                    // sx={textFieldDarkSx}
+                                    sx={textFieldDarkSx}
                                     slotProps={{
                                         input: {
                                             startAdornment: (
@@ -195,6 +210,7 @@ const Login = () => {
                                             ),
                                         },
                                     }}
+
                                 />
                             </Row>
 
@@ -202,18 +218,19 @@ const Login = () => {
                                 <Typography
                                     variant="body2"
                                     sx={{
-                                        mb: "-4px",        // rapat ke TextField
-                                        color: "#000000ff",     // warna label
+                                        mb: "-15px",        // rapat ke TextField
                                         fontSize: "0.85rem",
                                         fontWeight: 500
                                     }}
+
+                                    className="p-0"
                                 >
                                     Password
                                 </Typography>
                                 <TextField
                                     placeholder="Password"
                                     name="password"
-                                    type="password"
+                                    type={showPassword ? 'text' : 'password'}
                                     size="small"
 
                                     fullWidth
@@ -223,7 +240,7 @@ const Login = () => {
                                     onBlur={formik.handleBlur}
                                     error={formik.touched.password && Boolean(formik.errors.password)}
                                     helperText={formik.touched.password && formik.errors.password}
-                                    // sx={textFieldDarkSx}
+                                    sx={textFieldDarkSx}
                                     slotProps={{
                                         input: {
                                             startAdornment: (
@@ -231,6 +248,16 @@ const Login = () => {
                                                     <LockOutlinedIcon />
                                                 </InputAdornment>
                                             ),
+                                            endAdornment: (
+                                                <InputAdornment position="end">
+                                                    <IconButton
+                                                        onClick={() => setShowPassword(!showPassword)}
+                                                        edge="end"
+                                                    >
+                                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            )
                                         },
                                     }}
                                 />
