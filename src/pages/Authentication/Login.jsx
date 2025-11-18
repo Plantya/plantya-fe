@@ -81,7 +81,7 @@ const Login = () => {
             setMessage("");
             setLoadingSpinner(true);
             try {
-                await new Promise(resolve => setTimeout(resolve, 800)); // simulasi API
+                // await new Promise(resolve => setTimeout(resolve, 800)); // simulasi API
                 handleLogin(values);
             } finally {
                 setSubmitting(false);
@@ -91,53 +91,46 @@ const Login = () => {
     });
 
     const textFieldDarkSx = {
-        "& .MuiInputLabel-root": {
-            color: "#A7B3C2",
-        },
-        "& .MuiInputLabel-root.Mui-focused": {
-            color: "#DCE3EA",
-        },
-
         "& .MuiOutlinedInput-root": {
             color: "white",
-            backgroundColor: "#0E1621",
-            borderRadius: "10px",
+            borderRadius: "15px",
 
             "& fieldset": {
-                borderColor: "#2F3A48",
+                borderColor: "#352F44",
+                borderWidth: "1px",
+                transition: "border-color 0.25s ease, box-shadow 0.25s ease",
             },
             "&:hover fieldset": {
-                borderColor: "#4A5B70",
+                borderColor: "#FFFFFF",
             },
             "&.Mui-focused fieldset": {
-                borderColor: "#6FA3FF",
-                boxShadow: "0 0 6px rgba(111,163,255,0.5)",
+                borderColor: "#FFFFFF",
             },
         },
 
-        // 👉 Placeholder jadi putih
         "& .MuiInputBase-input::placeholder": {
             color: "#ffffff",
             opacity: 1,
-            fontSize: '0.8rem'
-
+            fontSize: "1rem",
         },
 
-        // 👉 Warna icon menjadi putih
         "& .MuiSvgIcon-root": {
             color: "white",
         },
 
-        // 👉 Autofill
-        "& input:-webkit-autofill": {
-            WebkitBoxShadow: "0 0 0 1000px #0E1621 inset !important",
+        // ============================================
+        //   ✔ AUTOFILL FIX PALING AMAN
+        // ============================================
+
+        // Global override autofill root
+        "& input:-webkit-autofill, & input:-webkit-autofill:hover, & input:-webkit-autofill:focus, & input:-webkit-autofill:active": {
+            WebkitBoxShadow: "0 0 0 1000px #0E1621 inset !important", // <--- BACKGROUND GELAP
             WebkitTextFillColor: "#ffffff !important",
-        },
-        "& input:-webkit-autofill:focus": {
-            WebkitBoxShadow: "0 0 0 1000px #0E1621 inset !important",
-            WebkitTextFillColor: "#ffffff !important",
+            caretColor: "#ffffff !important",
+            borderRadius: "15px",
         },
     };
+
 
 
 
@@ -152,7 +145,7 @@ const Login = () => {
                 text="Processing..."
             />
 
-            <Container fluid className="" style={{ width: '60%' }}>
+            <Container fluid className="" style={{ width: '65%' }}>
                 <Col lg="12" md="12" sm="12" className="justify-content-center">
 
                     <Row className="mb-4" style={{ color: '#DEF2FF' }}>
@@ -191,12 +184,12 @@ const Login = () => {
                                 {message}
                             </Alert>}
 
-                            <Row className="bg-info">
+                            <Row className="">
                                 <Typography
                                     variant="body2"
                                     sx={{
                                         mb: "-10px",        // rapat ke TextField
-                                        fontSize: "0.85rem",
+                                        // fontSize: "0.85rem",
                                         fontWeight: "medium"
                                     }}
                                     className="p-0"
@@ -204,9 +197,10 @@ const Login = () => {
                                     Email or Username
                                 </Typography>
                                 <TextField
+                                    variant="outlined"
                                     placeholder="Email or username"
                                     name="username"
-                                    size="small"
+                                    size="medium"
                                     fullWidth
                                     margin="normal"
                                     value={formik.values.username}
@@ -233,7 +227,7 @@ const Login = () => {
                                     variant="body2"
                                     sx={{
                                         mb: "-10px",        // rapat ke TextField
-                                        fontSize: "0.85rem",
+                                        // fontSize: "0.85rem",
                                         fontWeight: "medium"
                                     }}
 
@@ -242,10 +236,11 @@ const Login = () => {
                                     Password
                                 </Typography>
                                 <TextField
+                                    variant="outlined"
                                     placeholder="Password"
                                     name="password"
                                     type={showPassword ? 'text' : 'password'}
-                                    size="small"
+                                    size="medium"
 
                                     fullWidth
                                     margin="normal"
@@ -263,7 +258,7 @@ const Login = () => {
                                                 </InputAdornment>
                                             ),
                                             endAdornment: (
-                                                <InputAdornment position="end">
+                                                <InputAdornment position="start">
                                                     <IconButton
                                                         onClick={() => setShowPassword(!showPassword)}
                                                         edge="end"
