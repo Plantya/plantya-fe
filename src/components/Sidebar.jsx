@@ -15,6 +15,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 const Sidebar = () => {
     const location = useLocation();
 
+    // Mapping dari index.jsx route path
     const menuItems = [
         { text: "Dashboard", path: "/dashboard", icon: <DashboardIcon /> },
         { text: "Master Data", path: "/master-data", icon: <PeopleIcon /> },

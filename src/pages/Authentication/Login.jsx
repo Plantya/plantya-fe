@@ -113,10 +113,11 @@ const Login = () => {
         "& .MuiOutlinedInput-root": {
             color: "white",
             borderRadius: "15px",
+            borderWidth: '2px',
 
             "& fieldset": {
                 borderColor: "#352F44",
-                borderWidth: "1px",
+                borderWidth: "2px",
                 transition: "border-color 0.25s ease, box-shadow 0.25s ease",
             },
             "&:hover fieldset": {
@@ -351,8 +352,9 @@ const Login = () => {
                                         minHeight: 56,
                                         borderColor: '#352F44',
                                         color: 'white',
+                                        borderWidth: '2px',
                                         // py: 1.2,
-                                        borderRadius: 2,
+                                        borderRadius: '15px',
                                         "&:hover": {
                                             backgroundColor: "#ffffffff",
                                             color: '#000000',
@@ -369,7 +371,7 @@ const Login = () => {
 
                     <Row className="text-white text-center align-items-center justify-content-center mt-4 gap-1">
                         <Col lg={12} md={12} sm={12} className="d-flex justify-content-center align-items-center w-75">
-                            <hr className="flex-grow-1 text-white my-0 mx-3 " />
+                            <hr className="flex-grow-1 text-white my-0 mx-3 border-success" />
                             <p className="my-0 mx-2 ">OR</p>
                             <hr className="flex-grow-1 text-white my-0 mx-3" />
                         </Col>
