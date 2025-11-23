@@ -37,31 +37,18 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     const navigate = useNavigate()
-    // Function Handle Login
-    // Login with API
-    const handleLogin = async (values) => {
-        try {
-            const response = await axiosInstance().post(ListApi.auth.login, {
-                username_or_email: values.username,
-                password: values.password
-            }, {
-                withCredentials: true,
-            })
-            login(response.data.data)
 
-            if (response.status == 200) {
-                navigate("/");
-                console.log("Login Success")
-            }
-        } catch (error) {
-            setShowAlert(true)
-            if (error.response) {
-                setMessage(error.response.data.message)
-            } else {
-                setMessage(error.message)
-            }
-        }
+    // Function Handle Login
+    const handleLogin = async (values) => {
+        const response = await axiosInstance().post(ListApi.auth.login, {
+            username_or_email: values.username,
+            password: values.password
+        }, {
+            withCredentials: true,
+        })
+        return response
     }
+
 
     // Validation Form
     const formik = useFormik({
@@ -77,11 +64,25 @@ const Login = () => {
             }),
 
         onSubmit: async (values, { setSubmitting, resetForm }) => {
-            debugger
-            setMessage("");
+            // Default state and submit form
+            setSubmitting(true)
             setLoadingSpinner(true);
+            setShowAlert(false)
+            setMessage("");
+
             try {
-                await handleLogin(values);
+                const response = await handleLogin(values)
+                login(response.data.data)
+                navigate("/")
+
+            } catch (error) {
+                setShowAlert(true)
+                if (error.response) {
+                    setMessage(error.response.data.message);
+                } else {
+                    setMessage(error.message);
+                }
+
             } finally {
                 setSubmitting(false);
                 setLoadingSpinner(false);
@@ -94,6 +95,7 @@ const Login = () => {
             }
         },
     });
+
 
 
 
@@ -301,6 +303,6 @@ const Login = () => {
 
         </React.Fragment >
     );
-};
+}
 
 export default Login;

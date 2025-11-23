@@ -49,61 +49,17 @@ const Register = () => {
 
     // Function Handle Register
     const handleRegister = async (values) => {
-
-        try {
-            const response = await axiosInstance().post(
-                ListApi.auth.register,
-                {
-                    username: values.username,
-                    email: values.email,
-                    password: values.password,
-                    confirm_password: values.rePassword
-                },
-                { withCredentials: true }
-            );
-
-            setLoadingSpinner(false);
-            setTextLoading("");
-
-            if (response.status === 200) {
-                // Set popup success
-                setShowModal(true);
-                setTypeModal("success");
-                setHeaderMessageModal("Register Success!");
-                setMessageModal(response.message);
-
-                // Auto-close popup (3 detik)
-                setTimeout(() => {
-                    setShowModal(false)
-                    setLoadingSpinner(true);
-                    setTextLoading("Redirect to login...")
-
-                    setTimeout(() => {
-                        resetModalState();
-                        setLoadingSpinner(false);
-                        setTextLoading("")
-                        navigate("/login");
-                    }, 1000);
-
-                }, 3000);
-            }
-
-        } catch (error) {
-            // Set popup error
-            debugger
-            setLoadingSpinner(false);
-            setTextLoading("");
-            setShowModal(true);
-            setTypeModal("error");
-            setHeaderMessageModal("Register Failed!");
-            setMessageModal(error?.response?.data?.message || error.message);
-
-            // Auto-close popup (3 detik)
-            setTimeout(() => {
-                setShowModal(false)
-                resetModalState();
-            }, 3000);
-        }
+        const response = await axiosInstance().post(
+            ListApi.auth.register,
+            {
+                username: values.username,
+                email: values.email,
+                password: values.password,
+                confirm_password: values.rePassword
+            },
+            { withCredentials: true }
+        );
+        return response;
     };
 
 
@@ -142,16 +98,51 @@ const Register = () => {
             }),
 
         onSubmit: async (values, { setSubmitting, resetForm }) => {
+            setSubmitting(true);
+            setLoadingSpinner(true);
+            setTextLoading("Processing...");
+
             try {
-                setLoadingSpinner(true)
-                setTextLoading("Processing..")
-                await handleRegister(values);
-            } finally {
-                debugger
+                const response = await handleRegister(values)
+
+                setLoadingSpinner(false)
+                setTextLoading("")
+                setShowModal(true)
+                setTypeModal("success");
+                setHeaderMessageModal("Register Success!");
+                setMessageModal(response?.data?.message || "");
+
+                setTimeout(() => {
+                    setShowModal(false);
+                    setLoadingSpinner(true);
+                    setTextLoading("Redirect to login...");
+
+                    setTimeout(() => {
+                        resetModalState();
+                        setLoadingSpinner(false);
+                        setTextLoading("");
+                        navigate("/login");
+                    }, 1000);
+                }, 3000);
+            } catch (error) {
+                setLoadingSpinner(false);
+                setTextLoading("");
+
+                setShowModal(true);
+                setTypeModal("error");
+                setHeaderMessageModal("Register Failed!");
+                setMessageModal(error?.response?.data?.message || error.message);
+
+                setTimeout(() => {
+                    setShowModal(false);
+                    resetModalState();
+                }, 3000);
+            }
+            finally {
                 setSubmitting(false);
-                setShowPassword(false)
-                setShowRePassword(false)
-                resetForm()
+                setShowPassword(false);
+                setShowRePassword(false);
+                resetForm();
             }
         },
     });
