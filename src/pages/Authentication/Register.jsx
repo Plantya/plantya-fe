@@ -30,6 +30,7 @@ import ListApi from "../../utils/ListApi";
 import PopupModal from "../../common/PopupModal";
 
 const Register = () => {
+    const [textLoading, setTextLoading] = useState("Processing...")
     const [typeModal, setTypeModal] = useState("");
     const [messageModal, setMessageModal] = useState("Test");
     const [headerMessageModal, setHeaderMessageModal] = useState("");
@@ -40,50 +41,70 @@ const Register = () => {
 
     const navigate = useNavigate()
 
+    const resetModalState = () => {
+        setTypeModal("");
+        setHeaderMessageModal("");
+        setMessageModal("");
+    };
+
     // Function Handle Register
     const handleRegister = async (values) => {
-        debugger
+
         try {
-            debugger
-            const response = await axiosInstance().post(ListApi.auth.register,
+            const response = await axiosInstance().post(
+                ListApi.auth.register,
                 {
                     username: values.username,
                     email: values.email,
                     password: values.password,
                     confirm_password: values.rePassword
                 },
-                {
-                    withCredentials: true,
-                })
-            console.log(response)
+                { withCredentials: true }
+            );
 
-            if (response.status == 200) {
-                setShowModal(true)
-                setTypeModal("success")
-                setHeaderMessageModal("Register Success!")
-                setMessageModal(response.message)
+            setLoadingSpinner(false);
+            setTextLoading("");
 
+            if (response.status === 200) {
+                // Set popup success
+                setShowModal(true);
+                setTypeModal("success");
+                setHeaderMessageModal("Register Success!");
+                setMessageModal(response.message);
+
+                // Auto-close popup (3 detik)
                 setTimeout(() => {
                     setShowModal(false)
-                    setTypeModal("")
-                    setHeaderMessageModal("")
-                    setMessageModal("")
+                    setLoadingSpinner(true);
+                    setTextLoading("Redirect to login...")
 
-                    navigate("/");
-                }, 3000)
+                    setTimeout(() => {
+                        resetModalState();
+                        setLoadingSpinner(false);
+                        setTextLoading("")
+                        navigate("/login");
+                    }, 1000);
+
+                }, 3000);
             }
+
         } catch (error) {
-            setShowModal(true)
-            setHeaderMessageModal("Register Failed!")
-            setTypeModal("error")
-            if (error.response) {
-                debugger
-                setMessageModal(error.response.data.message)
-            } else {
-                setMessageModal(error.message)
-            }
+            // Set popup error
+            debugger
+            setLoadingSpinner(false);
+            setTextLoading("");
+            setShowModal(true);
+            setTypeModal("error");
+            setHeaderMessageModal("Register Failed!");
+            setMessageModal(error?.response?.data?.message || error.message);
+
+            // Auto-close popup (3 detik)
+            setTimeout(() => {
+                setShowModal(false)
+                resetModalState();
+            }, 3000);
         }
-    }
+    };
 
 
     // Validation Form
@@ -92,8 +113,8 @@ const Register = () => {
         {
             username: "",
             email: "",
-            password: "",
-            rePassword: "",
+            password: "Admin1234",
+            rePassword: "Admin1234",
         },
         validationSchema: Yup.object
             ({
@@ -121,24 +142,16 @@ const Register = () => {
             }),
 
         onSubmit: async (values, { setSubmitting, resetForm }) => {
-            debugger
-            setLoadingSpinner(true);
             try {
+                setLoadingSpinner(true)
+                setTextLoading("Processing..")
                 await handleRegister(values);
             } finally {
                 debugger
                 setSubmitting(false);
-                setLoadingSpinner(false);
-                resetForm()
                 setShowPassword(false)
                 setShowRePassword(false)
-
-                setTimeout(() => {
-                    setShowModal(false)
-                    setMessageModal("");
-                    setHeaderMessageModal("")
-                    setTypeModal("")
-                }, 3000)
+                resetForm()
             }
         },
     });
@@ -147,7 +160,7 @@ const Register = () => {
         <React.Fragment>
             <PageLoading
                 open={loadingSpinner}
-                text="Processing..."
+                text={textLoading}
             />
 
             <PopupModal
