@@ -131,7 +131,7 @@ const Register = () => {
                 setShowModal(true);
                 setTypeModal("error");
                 setHeaderMessageModal("Register Failed!");
-                setMessageModal(error?.response?.data?.message || error.message);
+                setMessageModal(error?.response?.data?.message || "System is Unavailable. Please Try Again Later.");
 
                 setTimeout(() => {
                     setShowModal(false);

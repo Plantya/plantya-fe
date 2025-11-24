@@ -9,7 +9,7 @@ export default function TestBootstrap() {
                 className="bg-secondary p-0"
                 maxWidth={false} // Menghilangkan batasan lebar
             >
-                <Row>
+                <Row style={{ height: '120vh'}}>
                     <Col>
                         {/* <Alert color="primary">Tab 🎉</Alert> */}
                         <Alert color="primary">Graph || Table</Alert>

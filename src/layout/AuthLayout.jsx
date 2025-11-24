@@ -45,11 +45,11 @@ const AuthLayout = ({ children }) => {
                 {/* Header */}
                 <header
                     style={{
-                        height: "64px",
+                        height: "10%",
                         backgroundColor: "#ffffff",
                         boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
                         zIndex: 1100,
-                        position: "sticky",
+                        position: "relative",
                         top: 0,
                     }}
                 >

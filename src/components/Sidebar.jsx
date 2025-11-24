@@ -26,37 +26,39 @@ const Sidebar = () => {
         <Box
             sx={{
                 height: "100vh",
-                display: "flex",
-                flexDirection: "column",
                 bgcolor: "#ffffff",
-                borderRight: "1px solid #ddd",
-                position: "fixed",
+                borderRight: "3px solid #352F44",
+                // position: "fixed",
                 top: 0,
                 left: 0,
                 width: 240,
                 zIndex: 1200,
                 boxShadow: "none",
+                backgroundColor: "#0F1624",
+                color: '#ffffff',
+                overflowY: "auto",
             }}
-            className='bg-dark'
+            className='d-flex flex-column fixed-sidebar'
         >
             {/* Header Sidebar */}
             <Box
                 sx={{
-                    height: 64, // sama tinggi dengan AppBar
+                    height: "10%",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    borderBottom: "1px solid #e0e0e0",
-                    backgroundColor: "#2f5174ff",
+                    borderBottom: "3px solid #352F44",
                     color: "#fff",
                     fontWeight: "bold",
                     fontSize: "1.1rem",
                     letterSpacing: 0.5,
                 }}
             >
-                {/* Bisa ganti dengan img logo */}
-                {/* <img src="/logo.png" alt="Logo" style={{ height: 32 }} /> */}
-                MyApp
+                <img
+                    src="/BaseLogo.png"
+                    alt="Logo"
+                    style={{ height: 40 }}
+                />
             </Box>
 
             {/* Menu List */}
@@ -70,7 +72,7 @@ const Sidebar = () => {
                         sx={{
                             "&.Mui-selected": {
                                 bgcolor: "#e3f2fd",
-                                borderLeft: "4px solid #1976d2",
+                                borderLeft: "3px solid #352F44",
                             },
                             "&:hover": {
                                 bgcolor: "#f5f5f5",
@@ -88,18 +90,6 @@ const Sidebar = () => {
 
             <Divider />
 
-            {/* Footer Sidebar */}
-            <Box
-                sx={{
-                    p: 2,
-                    textAlign: "center",
-                    fontSize: "0.85rem",
-                    color: "gray",
-                    borderTop: "1px solid #eee",
-                }}
-            >
-                © 2025 MyApp
-            </Box>
         </Box>
     );
 };
