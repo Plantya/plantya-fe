@@ -37,13 +37,13 @@ const Sidebar = () => {
                 backgroundColor: "#0F1624",
                 color: '#ffffff',
                 overflowY: "auto",
-            }}
+            }} 
             className='d-flex flex-column fixed-sidebar'
         >
             {/* Header Sidebar */}
             <Box
                 sx={{
-                    height: "10%",
+                    height: "70px",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",

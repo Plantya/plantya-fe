@@ -49,6 +49,30 @@ const Login = () => {
         return response
     }
 
+    // Login with state
+    const usrn = "Test"
+    const pass = 1234
+    const handeLoginState = () => {
+        const { username, password } = formik.values
+        if (username === usrn && password == pass) {
+            login({
+                username: usrn,
+                password: pass,
+            })
+            navigate("/")
+        } else {
+            // misal mau munculkan error
+            formik.setErrors({
+                username: "Username atau password salah",
+                password: "Username atau password salah",
+            });
+
+            // reset password saja
+            formik.resetForm();
+        }
+    }
+
+
 
     // Validation Form
     const formik = useFormik({
@@ -71,7 +95,9 @@ const Login = () => {
             setMessage("");
 
             try {
-                const response = await handleLogin(values)
+                // const response = await handleLogin(values)
+                const response = await handeLoginState(values)
+
                 login(response.data.data)
                 navigate("/")
 

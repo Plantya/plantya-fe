@@ -2,74 +2,81 @@ import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 
-const AuthLayout = ({ children }) => {
-    const [isCollapsed, setIsCollapsed] = useState(false); // State untuk collapse sidebar
+const SIDEBAR_COLLAPSE_WIDTH = 70;
+const SIDEBAR_WIDTH = 240;
+const HEADER_HEIGHT = 70;
 
+const AuthLayout = ({ children }) => {
+
+    const [isCollapsed, setIsCollapsed] = useState(false); // State untuk collapse sidebar
     const toggleSidebar = () => {
         setIsCollapsed((prev) => !prev); // Toggle state
     };
 
     return (
-        <div style={{ display: "flex", minHeight: "100vh" }}>
-            {/* Sidebar */}
-            {!isCollapsed && ( // Sidebar hanya ditampilkan jika tidak di-collapse
-                <aside
-                    style={{
-                        width: "240px", // Lebar sidebar tetap
-                        minHeight: "100vh",
-                        boxSizing: "border-box",
-                        position: "fixed",
-                        top: 0,
-                        left: 0,
-                        zIndex: 1200,
-                        backgroundColor: "#ffffff",
-                        borderRight: "1px solid #e0e0e0",
-                        transition: "transform 0.3s ease", // Animasi saat buka/tutup
-                    }}
-                >
-                    <Sidebar />
-                </aside>
-            )}
+        <div style={{ display: 'flex', minHeight: "100vh" }}>
 
-            {/* Area utama */}
+            {/* Sidebar */}
+            <aside
+                style={{
+                    width: isCollapsed ? SIDEBAR_COLLAPSE_WIDTH : SIDEBAR_WIDTH, // Lebar sidebar berubah sesuai state
+                    position: "fixed",
+                    top: 0,
+                    left: 0,
+                    height: '100vh',
+                    backgroundColor: "#0F1624",
+                    borderRight: "3px solid #352F44",
+                    overflow: "hidden",
+                    transition: "width 0.3s ease",
+                    zIndex: 1200,
+                }}
+            >
+                <Sidebar
+                    isCollapsed={isCollapsed}
+                />
+            </aside>
+
             <div
                 style={{
-                    marginLeft: isCollapsed ? "0" : "240px", // Sesuaikan margin dengan lebar sidebar
+                    marginLeft: isCollapsed ? SIDEBAR_COLLAPSE_WIDTH : SIDEBAR_WIDTH,
                     flex: 1,
                     display: "flex",
                     flexDirection: "column",
-                    transition: "margin-left 0.3s ease", // Animasi saat buka/tutup
+                    transition: "margin-left 0.3s ease",
                 }}
-                className=""
             >
+
                 {/* Header */}
                 <header
                     style={{
-                        height: "10%",
-                        backgroundColor: "#ffffff",
-                        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-                        zIndex: 1100,
-                        position: "relative",
+                        height: HEADER_HEIGHT,
+                        backgroundColor: "#0F1624",
+                        borderBottom: "3px solid #352F44",
+                        position: "sticky",
                         top: 0,
+                        zIndex: 1100,
                     }}
                 >
                     <Header toggleSidebar={toggleSidebar} isCollapsed={isCollapsed} />
                 </header>
 
-                {/* Konten utama */}
+
+                {/* Main Content */}
                 <main
                     style={{
                         flex: 1,
                         padding: "24px",
-                        backgroundColor: "#f8f9fa",
-                        boxSizing: "border-box",
+                        backgroundColor: "#0F1624",
+                        color: "#fff",
+                        minHeight: "calc(100vh - 70px)",
+                        overflowY: "auto",
                     }}
-                    className="bg-dark"
                 >
                     {children}
                 </main>
             </div>
         </div>
+
     );
 };
 
