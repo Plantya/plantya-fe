@@ -214,7 +214,13 @@ const Sidebar = (props) => {
                                                     transition: "opacity 0.35s ease, transform 0.35s ease",
                                                 }}
                                             >
-                                                <List component="div" disablePadding>
+                                                <List component="div" disablePadding
+                                                    sx={{
+                                                        width: '75%',
+                                                        ml: '25%',
+                                                        borderLeft: '3px solid #352F44',
+                                                    }}
+                                                >
                                                     {item.sub.map((sub, subIndex) => (
                                                         <ListItemButton
                                                             key={subIndex}
@@ -222,14 +228,15 @@ const Sidebar = (props) => {
                                                             to={sub.path}
                                                             selected={location.pathname === sub.path}
                                                             sx={{
-                                                                pl: 6,
                                                                 "&.Mui-selected": {
-                                                                    bgcolor: "#e3f2fd",
-                                                                    borderLeft: "3px solid #352F44",
+                                                                    bgcolor: "#323347",
+                                                                    borderRadius: 35,
                                                                 },
+                                                                "&:hover": { bgcolor: "#323347", borderRadius: 35, transition: "all 0.5s ease" },
                                                             }}
+
                                                         >
-                                                            <ListItemIcon sx={{ minWidth: 36, color: "#64748B" }}>
+                                                            <ListItemIcon sx={{ minWidth: 36, color: "#64748B" }} >
                                                                 {sub.icon}
                                                             </ListItemIcon>
                                                             <ListItemText primary={sub.text} />
