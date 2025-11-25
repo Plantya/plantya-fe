@@ -3,23 +3,24 @@ import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 
 const SIDEBAR_COLLAPSE_WIDTH = 70;
-const SIDEBAR_WIDTH = 240;
+const SIDEBAR_WIDTH = 280;
 const HEADER_HEIGHT = 70;
 
 const AuthLayout = ({ children }) => {
 
-    const [isCollapsed, setIsCollapsed] = useState(false); // State untuk collapse sidebar
+    const [isCollapsed, setIsCollapsed] = useState(false);
     const toggleSidebar = () => {
-        setIsCollapsed((prev) => !prev); // Toggle state
+        setIsCollapsed((prev) => !prev);
     };
 
     return (
-        <div style={{ display: 'flex', minHeight: "100vh" }}>
+        // Container
+        <div style={{ display: 'flex', height: "100vh", overflow: "hidden" }}>
 
             {/* Sidebar */}
             <aside
                 style={{
-                    width: isCollapsed ? SIDEBAR_COLLAPSE_WIDTH : SIDEBAR_WIDTH, // Lebar sidebar berubah sesuai state
+                    width: isCollapsed ? SIDEBAR_COLLAPSE_WIDTH : SIDEBAR_WIDTH,
                     position: "fixed",
                     top: 0,
                     left: 0,
@@ -33,9 +34,12 @@ const AuthLayout = ({ children }) => {
             >
                 <Sidebar
                     isCollapsed={isCollapsed}
+                    heightHeader={HEADER_HEIGHT}
                 />
             </aside>
 
+
+            {/* Header and Content Wrapper */}
             <div
                 style={{
                     marginLeft: isCollapsed ? SIDEBAR_COLLAPSE_WIDTH : SIDEBAR_WIDTH,
@@ -43,6 +47,8 @@ const AuthLayout = ({ children }) => {
                     display: "flex",
                     flexDirection: "column",
                     transition: "margin-left 0.3s ease",
+                    height: "100vh",
+                    overflow: "hidden",
                 }}
             >
 
@@ -68,7 +74,6 @@ const AuthLayout = ({ children }) => {
                         padding: "24px",
                         backgroundColor: "#0F1624",
                         color: "#fff",
-                        minHeight: "calc(100vh - 70px)",
                         overflowY: "auto",
                     }}
                 >
