@@ -3,6 +3,7 @@ import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import { AppBar, Toolbar, Typography, IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import CodeIcon from '@mui/icons-material/Code';
 
 
 
@@ -43,28 +44,29 @@ const AuthLayout = ({ children }) => {
             </aside>
 
             {/* Floating Toggle Button */}
-            {/* Floating Toggle Button */}
             <IconButton
                 onClick={toggleSidebar}
                 sx={{
                     position: "fixed",
                     top: HEADER_HEIGHT,
                     left: isCollapsed
-                        ? SIDEBAR_COLLAPSE_WIDTH - 15
-                        : SIDEBAR_WIDTH - 15,
+                        ? SIDEBAR_COLLAPSE_WIDTH - 18
+                        : SIDEBAR_WIDTH - 18,
                     transform: "translateY(-50%)",
                     zIndex: 2001,
-                    width: 36,
-                    height: 36,
-                    backgroundColor: "#ffc107",
-                    borderRadius: "50%",
+                    width: 35,
+                    height: 35,
+                    borderRadius: '5px',
+                    backgroundColor: "#0F1624",
+                    border: "3px solid #352F44",
                     transition: "left 0.3s ease",   // ⭐ ANIMASI SAMA DENGAN SIDEBAR
                     "&:hover": {
-                        backgroundColor: "#e6b800"
+                        bgcolor: "#323347",
                     }
+
                 }}
             >
-                <MenuIcon />
+                <CodeIcon sx={{ color: "#64748B" }} />
             </IconButton>
 
 
