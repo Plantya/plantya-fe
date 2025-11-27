@@ -117,12 +117,16 @@ const Sidebar = (props) => {
             <Box
                 sx={{
                     p: 2,
-                    p: 2,
                     flex: 1,
                     overflowY: "auto",
-                    overflowX: "hidden"
-                }}
-            >
+                    overflowX: "hidden",
+                    /* Hide scrollbar for Chrome, Safari and Edge */
+                    "&::-webkit-scrollbar": {
+                        display: "none"
+                    },
+                    /* Hide scrollbar for Firefox */
+                    scrollbarWidth: "none",
+                }}>
                 <Typography
                     sx={{
                         px: 3,
