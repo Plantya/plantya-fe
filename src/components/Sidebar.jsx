@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import {
     Box,
@@ -49,7 +49,16 @@ const Sidebar = (props) => {
             icon: <PeopleIcon />,
 
             sub: [
-                { text: "Dashboard", path: "/dashboard", icon: <PersonIcon /> },
+                { text: "testing", path: "/testing", icon: <PersonIcon /> },
+                { text: "Teams", path: "/master-data/team", icon: <GroupIcon /> },
+            ],
+        },
+        {
+            text: "Test",
+            icon: <PeopleIcon />,
+
+            sub: [
+                { text: "Test", path: "/test", icon: <PersonIcon /> },
                 { text: "Teams", path: "/master-data/team", icon: <GroupIcon /> },
             ],
         },
@@ -58,6 +67,18 @@ const Sidebar = (props) => {
         { text: "Settings", path: "/settings", icon: <SettingsIcon /> },
     ];
 
+    // Expand Parent Jika Child Menu Active Sesuai Path
+    useEffect(() => {
+        menuItems.forEach((item, index) => {
+            if (item.sub) {
+                let isMatch = item.sub.some(sub => sub.path === location.pathname);
+                if (isMatch) {
+                    setOpenMenuIndex(index);
+                }
+            }
+        });
+    }, [location.pathname]);
+
 
 
     return (
@@ -65,8 +86,8 @@ const Sidebar = (props) => {
         <div
             style={{
                 width: "100%",
-                height: "100%",
-                overflowY: "hidden",
+                height: "100vh",
+                overflow: "hidden",
                 backgroundColor: "#0F1624",
                 color: "#fff",
                 display: "flex",
@@ -95,6 +116,10 @@ const Sidebar = (props) => {
             <Box
                 sx={{
                     p: 2,
+                    p: 2,
+                    flex: 1,
+                    overflowY: "auto",
+                    overflowX: "hidden"
                 }}
             >
                 <Typography
@@ -112,7 +137,9 @@ const Sidebar = (props) => {
                     MAIN
                 </Typography>
 
-                <List sx={{ flex: 1, p: 0, overflowY: 'auto', color: '#64748B' }} className="d-flex flex-column gap-2" >
+                <List sx={{
+                    flex: 1, p: 0, color: '#64748B', my: 1,
+                }} className="d-flex flex-column" >
                     {menuItems.map((item, index) => {
                         const isParent = !!item.sub;
 
@@ -130,8 +157,9 @@ const Sidebar = (props) => {
                                             "&.Mui-selected": {
                                                 bgcolor: "#323347",
                                                 borderRadius: 35,
+                                                color: '#FFFFFF'
                                             },
-                                            "&:hover": { bgcolor: "#323347", borderRadius: 35, transition: "all 0.5s ease" },
+                                            "&:hover": { bgcolor: "#323347", borderRadius: 35, color: '#FFFFFF', transition: "all 0.5s ease" },
                                         }}
                                     >
                                         <ListItemIcon
@@ -170,8 +198,12 @@ const Sidebar = (props) => {
                                                 "&.Mui-selected": {
                                                     bgcolor: "#323347",
                                                     borderRadius: 35,
+                                                    color: '#FFFFFF'
                                                 },
-                                                "&:hover": { bgcolor: "#323347", borderRadius: 35, transition: "all 0.5s ease" },
+                                                "&:hover": {
+                                                    bgcolor: "#323347", borderRadius: 35, color: '#FFFFFF',
+                                                    transition: "all 0.5s ease"
+                                                },
                                             }}
                                         >
                                             <ListItemIcon
@@ -206,12 +238,11 @@ const Sidebar = (props) => {
                                         </ListItemButton>
 
                                         {/* Child Menu */}
-                                        <Collapse in={openMenuIndex === index} timeout={400} unmountOnExit>
+                                        <Collapse in={openMenuIndex === index} timeout={500} unmountOnExit>
                                             <Box
                                                 sx={{
                                                     opacity: openMenuIndex === index ? 1 : 0,
-                                                    transform: openMenuIndex === index ? "translateY(0px)" : "translateY(-6px)",
-                                                    transition: "opacity 0.35s ease, transform 0.35s ease",
+                                                    transition: "opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1)",
                                                 }}
                                             >
                                                 <List component="div" disablePadding
@@ -219,9 +250,11 @@ const Sidebar = (props) => {
                                                         width: '80%',
                                                         ml: '20%',
                                                         borderLeft: '3px solid #352F44',
-                                                        pl:1
+                                                        pl: 1,
+                                                        my: 1,
+
                                                     }}
-                                                     className="d-flex flex-column gap-2"
+                                                    className="d-flex flex-column"
                                                 >
                                                     {item.sub.map((sub, subIndex) => (
                                                         <ListItemButton
@@ -234,8 +267,9 @@ const Sidebar = (props) => {
                                                                 "&.Mui-selected": {
                                                                     bgcolor: "#323347",
                                                                     borderRadius: 35,
+                                                                    color: '#FFFFFF'
                                                                 },
-                                                                "&:hover": { bgcolor: "#323347", borderRadius: 35, transition: "all 0.5s ease" },
+                                                                "&:hover": { bgcolor: "#323347", borderRadius: 35, color: '#FFFFFF', transition: "all 0.5s ease" },
                                                             }}
 
                                                         >
@@ -250,7 +284,8 @@ const Sidebar = (props) => {
                                         </Collapse>
 
                                     </>
-                                )}
+                                )
+                                }
                             </React.Fragment>
                         );
                     })}
@@ -258,7 +293,7 @@ const Sidebar = (props) => {
             </Box>
 
 
-        </div>
+        </div >
     );
 };
 

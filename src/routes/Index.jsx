@@ -7,7 +7,8 @@ import Logout from "../pages/Authentication/Logout";
 import Register from "../pages/Authentication/Register";
 
 const AuthProtectedRoutes = [
-    { path: "/dashboard", component: LazyLoadRoutes(() => import("../pages/app001/Dashboard")) }
+    { path: "/dashboard", component: LazyLoadRoutes(() => import("../pages/app001/Dashboard")) },
+    { path: "/test", component: LazyLoadRoutes(() => import("../pages/app002/Test")) }
     // { path: "/test", component: LazyLoadRoutes(() => import("../pages/app001/Test")) }
 ]
 
