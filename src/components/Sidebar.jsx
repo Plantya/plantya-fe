@@ -170,7 +170,6 @@ const Sidebar = (props) => {
                     style={{
                         height: 40,
                         width: 'auto',
-                        marginLeft: props.isCollapsed ? "3px" : "0px"
                     }}
                 />
             </Box>
