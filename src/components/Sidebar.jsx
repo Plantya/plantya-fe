@@ -6,7 +6,6 @@ import {
     ListItemButton,
     ListItemText,
     ListItemIcon,
-    Divider,
     Collapse,
     Typography,
     Tooltip,
@@ -83,8 +82,8 @@ const Sidebar = (props) => {
 
     return (
         // Container 
-        <div
-            style={{
+        <Box
+            sx={{
                 width: "100%",
                 height: "100vh",
                 display: "flex",
@@ -110,8 +109,8 @@ const Sidebar = (props) => {
                     src={props.isCollapsed ? "/SmallIcon.png" : "/BaseLogo.png"}
                     alt="Logo"
                     style={{
-                        height: 40,
-                        width: 'auto',
+                        height: props.isCollapsed ? 30 : 40,
+                        width: props.isCollapsed ? 30 : 'auto',
                     }}
                 />
             </Box>
@@ -569,7 +568,7 @@ const Sidebar = (props) => {
             </Box>
 
 
-        </div >
+        </Box >
     );
 };
 

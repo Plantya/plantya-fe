@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
-import { AppBar, Toolbar, Typography, IconButton } from "@mui/material";
+import { AppBar, Toolbar, Typography, IconButton, Box } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CodeIcon from '@mui/icons-material/Code';
 
@@ -20,17 +20,18 @@ const AuthLayout = ({ children }) => {
 
     return (
         // Container
-        <div style={{ display: 'flex', height: "100vh", overflow: "visible" }}>
+        <Box sx={{ display: 'flex', minHeight: "100vh", overflow: "visible" }}>
 
             {/* Sidebar */}
-            <aside
-                style={{
+            <Box
+                component="aside"
+                sx={{
                     width: isCollapsed ? SIDEBAR_COLLAPSE_WIDTH : SIDEBAR_WIDTH,
                     position: "fixed",
                     top: 0,
                     left: 0,
                     height: '100vh',
-                    backgroundColor: "#0F1624",
+                    backgroundColor: "#inherit",
                     borderRight: "3px solid #352F44",
                     overflow: "visible",
                     transition: "width 0.5s ease-in-out",
@@ -41,7 +42,7 @@ const AuthLayout = ({ children }) => {
                     isCollapsed={isCollapsed}
                     heightHeader={HEADER_HEIGHT}
                 />
-            </aside>
+            </Box>
 
             {/* Floating Toggle Button */}
             <IconButton
@@ -72,23 +73,27 @@ const AuthLayout = ({ children }) => {
 
 
             {/* Header and Content Wrapper */}
-            <div
-                style={{
-                    marginLeft: isCollapsed ? SIDEBAR_COLLAPSE_WIDTH : SIDEBAR_WIDTH,
+            <Box
+                component="main"
+                sx={{
+                    ml: isCollapsed ? `${SIDEBAR_COLLAPSE_WIDTH}px` : `${SIDEBAR_WIDTH}px`,
                     flex: 1,
                     display: "flex",
                     flexDirection: "column",
                     transition: "margin-left 0.5s ease-in-out",
-                    height: "100vh",
+                    minHeight: "100vh",
+                    backgroundColor: "#inherit",
                     overflow: "visible",
                 }}
             >
 
                 {/* Header */}
-                <header
-                    style={{
+
+                <Box
+                    component="header"
+                    sx={{
                         height: HEADER_HEIGHT,
-                        backgroundColor: "#0F1624",
+                        backgroundColor: "#inherit",
                         borderBottom: "3px solid #352F44",
                         position: "sticky",
                         top: 0,
@@ -99,23 +104,24 @@ const AuthLayout = ({ children }) => {
                         toggleSidebar={toggleSidebar}
                         isCollapsed={isCollapsed}
                     />
-                </header>
+                </Box>
 
 
                 {/* Main Content */}
-                <main
-                    style={{
+                <Box
+                    component="main"
+                    sx={{
                         flex: 1,
-                        padding: "24px",
-                        backgroundColor: "#0F1624",
+                        p: 3,
+                        backgroundColor: "#inherit",
                         color: "#fff",
                         overflowY: "auto",
                     }}
                 >
                     {children}
-                </main>
-            </div>
-        </div>
+                </Box>
+            </Box>
+        </Box >
 
     );
 };
