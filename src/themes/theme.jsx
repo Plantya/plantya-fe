@@ -20,7 +20,7 @@ export const textFieldCustom = {
 
   position: 'relative',
   "& .MuiOutlinedInput-root": {
-    color: "#676767",
+    color: "#FFFFFF",
     borderRadius: "15px",
 
     "& fieldset": {
@@ -46,6 +46,11 @@ export const textFieldCustom = {
     color: "#676767",
     opacity: 1,
     fontSize: "1rem",
+  },
+  "& input:not(:placeholder-shown)": {
+    WebkitTextFillColor: "#FFFFFF !important",
+    color: "#FFFFFF !important",
+    caretColor: "#FFFFFF",
   },
 
   "& input:-webkit-autofill::placeholder": {
@@ -81,7 +86,7 @@ export const textFieldCustom = {
 
   "& input:-webkit-autofill": {
     WebkitBoxShadow: "0 0 0 1000px transparent inset !important",
-    WebkitTextFillColor: "#676767 !important",
+    WebkitTextFillColor: "#FFFFFF !important",
     borderRadius: "15px",
     transition: "background-color 5000s ease-in-out 0s",
     fontSize: "1rem !important",
@@ -89,26 +94,26 @@ export const textFieldCustom = {
   },
   "& input:-webkit-autofill:hover": {
     WebkitBoxShadow: "0 0 0 1000px transparent inset !important",
-    WebkitTextFillColor: "#676767 !important",
+    WebkitTextFillColor: "#FFFFFF !important",
     fontSize: "1rem !important",
     fontFamily: "inherit !important",
   },
   "& input:-webkit-autofill:focus": {
     WebkitBoxShadow: "0 0 0 1000px transparent inset !important",
-    WebkitTextFillColor: "#676767 !important",
+    WebkitTextFillColor: "#FFFFFF !important",
     outline: "none !important",
     fontSize: "1rem !important",
     fontFamily: "inherit !important",
   },
   "& input:-webkit-autofill:active": {
     WebkitBoxShadow: "0 0 0 1000px transparent inset !important",
-    WebkitTextFillColor: "#676767 !important",
+    WebkitTextFillColor: "#FFFFFF !important",
     fontSize: "1rem !important",
     fontFamily: "inherit !important",
   },
 
   "& input:-webkit-autofill::first-line": {
-    color: "#676767 !important",
+    color: "#FFFFFF !important",
     fontSize: "1rem !important",
     fontFamily: "inherit !important",
   },
