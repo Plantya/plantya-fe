@@ -63,15 +63,27 @@ const Header = (props) => {
                     alignItems: 'center',
                     height: "100%",
                     paddingRight: "0 !important",
+                    // p: "0 !important",
+                    // m: "0 !important",
                 }}
+            // className="bg-info"
 
             >
 
                 <Box
-                    // className="bg-info"
+                    // className="bg-success"
+                    sx={{
+                        // p: 0,
+                        // m: 0,
+                        height: '100%',
+                        display: 'flex',
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "flex-start",
+                    }}
                 >
                     {/* Judul Header */}
-                    <Typography variant="body2" sx={{ fontWeight: 'bold' }}>
+                    <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                         Welcome Back
                     </Typography>
                     <Typography variant="body2" sx={{ fontWeight: 'light' }}>
@@ -80,19 +92,27 @@ const Header = (props) => {
                 </Box>
 
                 <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'row',
-
-                    }}
                     // className="bg-warning"
+                    sx={{
+                        height: '50%',
+                        display: 'flex',
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        alignItems: "flex-center",
+                        // width: '10%',
+                        mr: 2
+                    }}
                 >
                     <Box
                         sx={{
                             // bgcolor: "red",
                             display: "flex",
                             alignItems: "center",
-                            p: 2
+                            justifyContent: "center",
+
+
+                            width: '100%',
+                            p: 1
                         }}
                     >
                         <IconButton color="inherit">
@@ -104,7 +124,14 @@ const Header = (props) => {
                         sx={{
                             display: "flex",
                             alignItems: "center",
-                            // p:1
+                            justifyContent: "center",
+                            alignItems: "center",
+                            borderLeft: '2px solid #383B42',
+
+
+                            width: '100%',
+
+                            p: 1,
                             // bgcolor: "green",
 
                         }}>
@@ -115,7 +142,6 @@ const Header = (props) => {
                             aria-describedby={id}
                             // onClick={handleLogout}
                             sx={{
-                                borderLeft: '2px solid #383B42',
                                 display: "flex",
                                 alignItems: "center",
                                 flexDirection: 'column',
@@ -124,12 +150,12 @@ const Header = (props) => {
                             }}
                         >
                             <AccountCircleOutlinedIcon fontSize="medium" />
-                            <Typography variant="body2" sx={{
+                            {/* <Typography variant="body2" sx={{
                                 fontWeight: '200',
                                 fontSize: '0.7rem',
                             }}>
                                 Joey Liauw Wiharta
-                            </Typography>
+                            </Typography> */}
 
                         </IconButton>
 
@@ -150,76 +176,137 @@ const Header = (props) => {
                                 paper: {
                                     sx: {
                                         // --- Styling Konsisten dengan Sidebar Popover ---
+                                        display: "flex",
+                                        flexDirection: "column",
                                         backgroundColor: "#16181A",
                                         border: "2px solid #383B42",
-                                        borderRadius: "12px",
+                                        borderRadius: "10px",
                                         mt: 1,
-                                        minWidth: "180px",
+                                        minWidth: "230px",
                                         overflow: 'hidden',
                                     }
                                 }
                             }}
                         >
-                            <List
+                            <Box
                                 sx={{
-                                    p: 1,
+                                    flex: 3,    // 75% fleksibel
                                     display: 'flex',
                                     flexDirection: 'column',
-                                    gap: 0.5,
+                                    alignItems: 'center',
+                                    justifyContent: "center",
+                                    gap: 2,
+                                    px: 2,
+                                    py: 2,
+                                    borderBottom: "2px solid #383B42",
                                 }}
+                            >
+                                <Box
+                                    component="img"
+                                    src="/GacorBang.jpg"   // ganti sesuai foto kamu
+                                    alt="Profile"
+                                    sx={{
+                                        width: 75,
+                                        height: 75,
+                                        borderRadius: "50%",
+                                        objectFit: "cover",
+                                        border: "2px solid #383B42",
+                                    }}
+                                />
+
+                                <Box sx={{ display: "flex", flexDirection: "column", textAlign: 'center' }} >
+                                    <Typography sx={{ fontSize: "1rem", fontWeight: 600, color: "#FAFAFA" }} >
+                                        Mekon (Local Storage)
+                                    </Typography>
+                                    <Typography sx={{ fontSize: "0.8rem", color: "#FAFAFA" }}>
+                                        Tumbal Sinarmas (Local Storage)
+                                    </Typography>
+                                </Box>
+                            </Box>
+
+                            <List
+                                sx={{
+                                    flex: 1,     // 25% fleksibel
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    p: 0,
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    // gap: 0.5,
+                                }}
+                            // className="bg-success"
                             >
                                 {/* Opsi Account Info */}
                                 <ListItemButton onClick={handleAccountInfo} sx={{
+                                    flex: 1,
                                     borderRadius: "8px",
-                                    py: 1,
-                                    pl: 1,
-                                    pr: 2,
-                                    minHeight: 'auto',
+                                    height: '100%',
                                     "&:hover": {
                                         bgcolor: "#1F1F1F",
                                         color: '#FFFFFF',
                                     },
+                                    // bgcolor: 'red',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
                                 }}>
                                     <ListItemIcon sx={{
                                         color: '#64748B',
                                         minWidth: 32,
+                                        // bgcolor: 'red',
+                                        "& svg": {
+                                            fontSize: 22,
+                                        },
                                     }}>
                                         <PersonOutlineOutlinedIcon fontSize="small" />
                                     </ListItemIcon>
-                                    <ListItemText primary="Account Info" sx={{
-                                        "& .MuiListItemText-primary": {
-                                            fontSize: "0.9rem",
-                                            fontWeight: 500,
-                                            color: 'inherit',
-                                        }
-                                    }} />
+                                    <ListItemText
+                                        primary="Profile"
+                                        sx={{
+                                            "& .MuiListItemText-primary": {
+                                                fontSize: "0.9rem",
+                                                fontWeight: 500,
+                                                color: 'inherit',
+                                            },
+                                            // bgcolor: 'red'
+
+                                        }} />
                                 </ListItemButton>
 
                                 {/* Opsi Logout */}
                                 <ListItemButton onClick={handleLogout} sx={{
+                                    flex: 1,
                                     borderRadius: "8px",
-                                    py: 1,
                                     pl: 1,
                                     pr: 2,
-                                    minHeight: 'auto',
+                                    height: '100%',
                                     "&:hover": {
                                         bgcolor: "#1F1F1F",
                                         color: '#FFFFFF',
                                     },
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
                                 }}>
                                     <ListItemIcon sx={{
                                         color: '#64748B',
                                         minWidth: 32,
+                                        // bgcolor: 'red',
+                                        "& svg": {
+                                            fontSize: 22,
+                                        },
                                     }}>
                                         <LogoutIcon fontSize="small" />
                                     </ListItemIcon>
-                                    <ListItemText primary="Logout" sx={{
-                                        "& .MuiListItemText-primary": {
-                                            fontSize: "0.9rem",
-                                            fontWeight: 500,
-                                            color: 'inherit',
-                                        }
-                                    }} />
+                                    <ListItemText
+                                        primary="Logout"
+                                        sx={{
+                                            "& .MuiListItemText-primary": {
+                                                fontSize: "0.9rem",
+                                                fontWeight: 500,
+                                                color: 'inherit',
+                                            }
+                                        }} />
                                 </ListItemButton>
                             </List>
                         </Popover>
