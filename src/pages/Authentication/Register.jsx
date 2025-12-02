@@ -190,7 +190,7 @@ const Register = () => {
 
                 {/* Body and Footer Grid */}
                 <Grid
-                    size={{ sm: 12, md: 8, lg: 6, xl: 4.5 }}
+                    size={{ xs: 12, sm: 10, md: 8, lg: 6, xl: 4.5 }}
                     alignItems="center"
                     sx={{
                         // textAlign: 'center',
