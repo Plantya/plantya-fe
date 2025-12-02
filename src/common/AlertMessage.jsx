@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Alert, Collapse, IconButton, Slide } from "@mui/material";
+import { Alert, Box, IconButton, Slide } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import CancelIcon from '@mui/icons-material/Cancel';
 
 const AlertMessage = (props) => {
     return (
-        <div
-            style={{
+        <Box
+            sx={{
                 position: "fixed",
                 top: 40,
                 left: 0,
@@ -18,8 +18,18 @@ const AlertMessage = (props) => {
                 pointerEvents: "none",
             }}
         >
-            <div style={{ width: "50%", pointerEvents: "auto" }}>
-                <Slide direction="down" in={props.open} >
+            <Box
+                sx={{
+                    width: { xs: '90%', sm: '75%', md: '60%', lg: '50%' },
+                    pointerEvents: "auto"
+                }}
+            >
+                <Slide
+                    direction="down"
+                    in={props.open}
+                    mountOnEnter
+                    unmountOnExit   
+                >
                     <Alert
                         variant="filled"
                         severity={props.severity || "info"}
@@ -29,7 +39,7 @@ const AlertMessage = (props) => {
                             alignItems: "center",
                             borderRadius: "10px",
                             color: '#FAFAFA',
-                            opacity: '90%',
+                            opacity: 0.9,
                             fontSize: '16px',
                         }}
                         action={
@@ -48,8 +58,8 @@ const AlertMessage = (props) => {
                         {props.message}
                     </Alert>
                 </Slide>
-            </div>
-        </div>
+            </Box>
+        </Box>
     );
 };
 
