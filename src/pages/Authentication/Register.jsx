@@ -25,9 +25,9 @@ import ListApi from "../../utils/ListApi";
 import PopupModal from "../../common/PopupModal";
 
 const Register = () => {
-    const [textLoading, setTextLoading] = useState("Processing...")
+    const [textLoading, setTextLoading] = useState("")
     const [typeModal, setTypeModal] = useState("");
-    const [messageModal, setMessageModal] = useState("Test");
+    const [messageModal, setMessageModal] = useState("");
     const [headerMessageModal, setHeaderMessageModal] = useState("");
     const [showModal, setShowModal] = useState(false)
     const [loadingSpinner, setLoadingSpinner] = useState(false);
@@ -442,7 +442,7 @@ const Register = () => {
                                     </Button>
                                 </Typography>
                             </Box>
-                            
+
                         </Box>
                     </Box>
                 </Grid>

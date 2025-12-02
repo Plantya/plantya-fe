@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Dialog, DialogContent, Typography, Box } from "@mui/material";
+import { Dialog, DialogContent, Typography, Box, Backdrop } from "@mui/material";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import CancelIcon from '@mui/icons-material/Cancel';
 
@@ -9,26 +9,20 @@ const PopupModal = (props) => {
 
     return (
         <>
-            {props.open && (
-                <div
-                    style={{
-                        position: "fixed",
-                        inset: 0,
-                        backdropFilter: "blur(8px)",
-                        zIndex: 1200,
-                        transition: "all 0.3s ease",
-                    }}
-                />
-            )}
-
-            {/* MODAL */}
             <Dialog
                 open={props.open}
                 onClose={props.onClose}
                 maxWidth="xs"
                 fullWidth
+                slots={{ backdrop: Backdrop }}
+                slotProps={{
+                    sx: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                        backdropFilter: 'blur(8px)',
+                    },
+                    timeout: 300,
+                }}
                 sx={{
-                    zIndex: 1300,
                     "& .MuiDialog-paper": {
                         borderRadius: "30px",
                         backgroundColor: "#121314",
@@ -38,12 +32,27 @@ const PopupModal = (props) => {
                 }}
             >
                 <DialogContent>
-                    {/* Icon */}
                     <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
                         {isSuccess ? (
-                            <CheckCircleRoundedIcon sx={{ fontSize: 100, color: "#8E83ED" }} />
+                            <CheckCircleRoundedIcon
+                                sx={{
+                                    fontSize: {
+                                        xs: 70,
+                                        sm: 100,
+                                    },
+                                    color: "#8E83ED"
+                                }}
+                            />
                         ) : (
-                            <CancelIcon sx={{ fontSize: 100, color: "#f44336" }} />
+                            <CancelIcon
+                                sx={{
+                                    fontSize: {
+                                        xs: 70,
+                                        sm: 100,
+                                    },
+                                    color: "#f44336"
+                                }}
+                            />
                         )}
                     </Box>
 
