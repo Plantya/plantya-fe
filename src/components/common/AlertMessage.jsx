@@ -21,11 +21,12 @@ const AlertMessage = (props) => {
                         size="small"
                         onClick={props.onClose}
                     >
-                        <CloseIcon fontSize="inherit" />
+                        <CloseIcon fontSize="inherit" color='#ff0000ff' />
                     </IconButton>
                 }
                 sx={{
                     mb: 2,
+                    color:"#ff0000ff"
                 }}
             >
                 {props.msg}
