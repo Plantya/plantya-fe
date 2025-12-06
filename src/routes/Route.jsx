@@ -9,7 +9,7 @@ import { useAuth } from "../context/AuthContext";
 const Authmiddleware = (props) => {
 
     const loginStatus = useAuth();
-    debugger
+    // debugger
 
     if (!loginStatus.loginStatus) {
         return (

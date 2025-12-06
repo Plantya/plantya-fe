@@ -25,6 +25,7 @@ const AuthLayout = (props) => {
         setMobileOpen(false)
     }, [isMobile])
 
+
     const toggleSidebar = () => {
         if (isMobile) {
             setMobileOpen(!isMobileOpen)
@@ -33,6 +34,9 @@ const AuthLayout = (props) => {
         }
     };
 
+    const handleMobileClose = () => {
+        setMobileOpen(false);
+    };
 
     const userData = JSON.parse(localStorage.getItem("user"));
     console.log(userData)
@@ -65,6 +69,7 @@ const AuthLayout = (props) => {
                     heightHeader={HEADER_HEIGHT}
                     userData={userData}
                     isMobileOpen={isMobileOpen}
+                    handleMobileClose={handleMobileClose}
                 />
             </Box>
 

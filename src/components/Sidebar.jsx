@@ -201,6 +201,10 @@ const Sidebar = (props) => {
                                                 } else if (isParent) {
                                                     handleToggleMenu(index)
                                                 }
+                                                if (!isParent && props.isMobileOpen && props.handleMobileClose) {
+                                                    debugger
+                                                    props.handleMobileClose();
+                                                }
                                             }
                                             }
                                             selected={!isParent && location.pathname === item.path || props.isCollapsed && isParent && isChildSelected(item)}
@@ -396,6 +400,11 @@ const Sidebar = (props) => {
                                                             component={Link}
                                                             to={sub.path}
                                                             selected={location.pathname === sub.path}
+                                                            onClick={() => {
+                                                                if (props.isMobileOpen && props.handleMobileClose) {
+                                                                    props.handleMobileClose();
+                                                                }
+                                                            }}
                                                             sx={{
                                                                 borderRadius: 35,
                                                                 px: 0,
@@ -512,11 +521,16 @@ const Sidebar = (props) => {
                                             }
                                         }}
                                     >
-                                        {/* Menu without child */}
+                                        {/* Menu Footer */}
                                         <ListItemButton
                                             component={Link}
                                             to={item.path}
                                             selected={location.pathname === item.path}
+                                            onClick={() => {
+                                                if (props.isMobileOpen && props.handleMobileClose) {
+                                                    props.handleMobileClose();
+                                                }
+                                            }}
                                             sx={{
                                                 borderRadius: 35,
                                                 mb: 1,
@@ -599,6 +613,7 @@ Sidebar.PropTypes = {
     heightHeader: PropTypes.any,
     userData: PropTypes.any,
     isMobileOpen: PropTypes.any,
+    handleMobileClose: PropTypes.any,
 };
 
 export default Sidebar;
