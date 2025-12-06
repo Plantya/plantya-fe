@@ -5,16 +5,18 @@ import { BrowserRouter } from "react-router-dom";
 import App from "../src/App"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { AuthProvider } from './context/AuthContext';
-import '../index.css'
+// import '../index.css'
 import { ThemeProvider } from "@mui/material/styles";
-import theme from './themes/theme';
+import { CssBaseline } from "@mui/material";
+import globalTheme from './themes/globalTheme';
 // ReactSession.setStoreType("localStorage");
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={globalTheme}>
+          <CssBaseline />
           <App />
         </ThemeProvider>
       </AuthProvider>

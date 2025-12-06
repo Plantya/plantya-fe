@@ -20,7 +20,6 @@ import IconButton from '@mui/material/IconButton';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import ListApi from "../../utils/ListApi";
-import { textFieldCustom } from "../../themes/theme"
 import AlertAuthMessage from "../../components/common/AlertAuthMessage";
 
 const Login = () => {
@@ -202,6 +201,7 @@ const Login = () => {
                                 Email or Username
                             </Typography>
                             <TextField
+                                className="auth-field"
                                 variant="outlined"
                                 placeholder="Email or username"
                                 name="username"
@@ -213,12 +213,15 @@ const Login = () => {
                                 onBlur={formik.handleBlur}
                                 error={formik.touched.username && Boolean(formik.errors.username)}
                                 helperText={formik.touched.username && formik.errors.username}
-                                sx={textFieldCustom}
                                 slotProps={{
                                     input: {
                                         startAdornment: (
                                             <InputAdornment position="start">
-                                                <MailOutlineOutlinedIcon />
+                                                <MailOutlineOutlinedIcon
+                                                    sx={{
+                                                        color: formik.values.username === "" ? 'text.secondary' : 'text.primary'
+                                                    }}
+                                                />
                                             </InputAdornment>
                                         ),
                                     },
@@ -233,6 +236,7 @@ const Login = () => {
                                 Password
                             </Typography>
                             <TextField
+                                className="auth-field"
                                 variant="outlined"
                                 placeholder="Password"
                                 name="password"
@@ -245,17 +249,22 @@ const Login = () => {
                                 onBlur={formik.handleBlur}
                                 error={formik.touched.password && Boolean(formik.errors.password)}
                                 helperText={formik.touched.password && formik.errors.password}
-                                sx={textFieldCustom}
                                 slotProps={{
                                     input: {
                                         startAdornment: (
                                             <InputAdornment position="start">
-                                                <LockOutlinedIcon />
+                                                <LockOutlinedIcon
+                                                    sx={{
+                                                        color: formik.values.password === "" ? 'text.secondary' : 'text.primary'
+                                                    }} />
                                             </InputAdornment>
                                         ),
                                         endAdornment: (
                                             <InputAdornment position="end">
                                                 <IconButton
+                                                    sx={{
+                                                        color: formik.values.password === "" ? 'text.secondary' : 'text.primary'
+                                                    }}
                                                     onClick={() => setShowPassword(!showPassword)}
                                                     edge="end"
                                                 >

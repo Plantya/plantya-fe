@@ -20,7 +20,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import IconButton from '@mui/material/IconButton';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { textFieldCustom } from "../../themes/theme"
+// import { textFieldCustom } from "../../themes/globalTheme"
 import ListApi from "../../utils/ListApi";
 import PopupModal from "../../components/common/PopupModal";
 
@@ -228,7 +228,7 @@ const Register = () => {
                                 Username
                             </Typography>
                             <TextField
-                                variant="outlined"
+                                className="auth-field"
                                 placeholder="Username"
                                 name="username"
                                 size="medium"
@@ -239,12 +239,14 @@ const Register = () => {
                                 onBlur={formik.handleBlur}
                                 error={formik.touched.username && Boolean(formik.errors.username)}
                                 helperText={formik.touched.username && formik.errors.username}
-                                sx={textFieldCustom}
                                 slotProps={{
                                     input: {
                                         startAdornment: (
                                             <InputAdornment position="start">
-                                                <AccountCircleIcon />
+                                                <AccountCircleIcon
+                                                    sx={{
+                                                        color: formik.values.username === "" ? 'text.secondary' : 'text.primary'
+                                                    }} />
                                             </InputAdornment>
                                         ),
                                     },
@@ -260,6 +262,7 @@ const Register = () => {
                                 Email
                             </Typography>
                             <TextField
+                                className="auth-field"
                                 variant="outlined"
                                 placeholder="Email"
                                 name="email"
@@ -271,12 +274,14 @@ const Register = () => {
                                 onBlur={formik.handleBlur}
                                 error={formik.touched.email && Boolean(formik.errors.email)}
                                 helperText={formik.touched.email && formik.errors.email}
-                                sx={textFieldCustom}
                                 slotProps={{
                                     input: {
                                         startAdornment: (
                                             <InputAdornment position="start">
-                                                <MailOutlineOutlinedIcon />
+                                                <MailOutlineOutlinedIcon
+                                                    sx={{
+                                                        color: formik.values.email === "" ? 'text.secondary' : 'text.primary'
+                                                    }} />
                                             </InputAdornment>
                                         ),
                                     },
@@ -292,6 +297,7 @@ const Register = () => {
                                 Password
                             </Typography>
                             <TextField
+                                className="auth-field"
                                 variant="outlined"
                                 placeholder="Password"
                                 name="password"
@@ -304,12 +310,14 @@ const Register = () => {
                                 onBlur={formik.handleBlur}
                                 error={formik.touched.password && Boolean(formik.errors.password)}
                                 helperText={formik.touched.password && formik.errors.password}
-                                sx={textFieldCustom}
                                 slotProps={{
                                     input: {
                                         startAdornment: (
                                             <InputAdornment position="start">
-                                                <LockOutlinedIcon />
+                                                <LockOutlinedIcon
+                                                    sx={{
+                                                        color: formik.values.password === "" ? 'text.secondary' : 'text.primary'
+                                                    }} />
                                             </InputAdornment>
                                         ),
                                         endAdornment: (
@@ -317,6 +325,9 @@ const Register = () => {
                                                 <IconButton
                                                     onClick={() => setShowPassword(!showPassword)}
                                                     edge="end"
+                                                    sx={{
+                                                        color: formik.values.password === "" ? 'text.secondary' : 'text.primary'
+                                                    }}
                                                 >
                                                     {showPassword ? <VisibilityOutlinedIcon /> : <VisibilityOff />}
                                                 </IconButton>
@@ -334,6 +345,7 @@ const Register = () => {
                                 Confirm Password
                             </Typography>
                             <TextField
+                                className="auth-field"
                                 variant="outlined"
                                 placeholder="Confirm password"
                                 name="rePassword"
@@ -346,12 +358,14 @@ const Register = () => {
                                 onBlur={formik.handleBlur}
                                 error={formik.touched.rePassword && Boolean(formik.errors.rePassword)}
                                 helperText={formik.touched.rePassword && formik.errors.rePassword}
-                                sx={textFieldCustom}
                                 slotProps={{
                                     input: {
                                         startAdornment: (
                                             <InputAdornment position="start">
-                                                <LockOutlinedIcon />
+                                                <LockOutlinedIcon
+                                                    sx={{
+                                                        color: formik.values.rePassword === "" ? 'text.secondary' : 'text.primary'
+                                                    }} />
                                             </InputAdornment>
                                         ),
                                         endAdornment: (
@@ -359,6 +373,9 @@ const Register = () => {
                                                 <IconButton
                                                     onClick={() => setShowRePassword(!showRePassword)}
                                                     edge="end"
+                                                    sx={{
+                                                        color: formik.values.rePassword === "" ? 'text.secondary' : 'text.primary'
+                                                    }}
                                                 >
                                                     {showRePassword ? <VisibilityOutlinedIcon /> : <VisibilityOff />}
                                                 </IconButton>
@@ -425,7 +442,7 @@ const Register = () => {
 
                                 <Typography
                                     variant="body2"
-                                    >
+                                >
                                     Have an account?
                                     <Button
                                         component={Link}
