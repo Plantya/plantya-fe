@@ -135,16 +135,17 @@ const AuthLayout = (props) => {
                     width: 35,
                     height: 35,
                     borderRadius: '5px',
-                    backgroundColor: "#16181A",
-                    border: "2px solid #383B42",
+                    backgroundColor: "background.secondary",
+                    border: "1px solid",
+                    borderColor: 'background.third',
                     transition: "left 0.3s ease",
                     display: { xs: 'none', sm: 'flex' },
                     "&:hover": {
-                        bgcolor: "#121314",
+                        bgcolor: "background.default",
                     }
                 }}
             >
-                <CodeIcon sx={{ color: "#383B42" }} />
+                <CodeIcon sx={{ color: "background.third" }} />
             </IconButton>
 
         </Box >
