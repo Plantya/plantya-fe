@@ -298,16 +298,12 @@ const Sidebar = (props) => {
                                                     onMouseLeave: () => {
                                                         setTimeout(handleClosePopover, 100);
                                                     },
+                                                    className: "sidebar-popover",
                                                     sx: {
-                                                        bgcolor: "#16181a",
-                                                        borderRadius: 3,
                                                         p: 1,
-                                                        border: "1px solid",
-                                                        borderColor:'background.third',
                                                         minWidth: '160px',
                                                         ml: 1,
-                                                        overflow: 'visible',
-                                                        transition: "opacity 0.5s ease-in-out, transform 0.5s ease-in-out"
+                                                        overflow: 'visible'
                                                     }
                                                 }
                                             }}
@@ -347,7 +343,6 @@ const Sidebar = (props) => {
                                                     >
                                                         <ListItemIcon
                                                             sx={{
-                                                                // --- Styling dari ListItemIcon di Collapse ---
                                                                 display: "flex",
                                                                 justifyContent: "center",
                                                                 color: 'inherit',

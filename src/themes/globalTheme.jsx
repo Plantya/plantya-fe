@@ -7,7 +7,6 @@ const globalTheme = createTheme({
     fontFamily: "Poppins, sans-serif",
   },
   palette: {
-    mode: 'dark',
     success: { main: '#07AB0E' },
     error: { main: '#DC3545' },
     info: { main: '#1976D2', secondary: '#24427D' },
@@ -156,6 +155,19 @@ const globalTheme = createTheme({
         }),
       }
     },
+
+    MuiPopover: {
+      styleOverrides: {
+        paper: ({ theme }) => ({
+          '&.sidebar-popover': {
+            backgroundColor: theme.palette.background.secondary,
+            borderRadius: 10,
+            border: `1px solid ${theme.palette.background.third}`,
+            transition: "opacity 0.5s ease-in-out, transform 0.5s ease-in-out"
+          }
+        })
+      }
+    }
 
     // Other Component if needed
   },
