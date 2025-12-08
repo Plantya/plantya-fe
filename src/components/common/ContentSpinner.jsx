@@ -12,7 +12,7 @@ const ContentSpinner = (props) => {
                 flexDirection: 'column',
                 minHeight: '80vh',
                 width: '100%',
-                backgroundColor: 'background.main',
+                backgroundColor: 'background.default',
             }}
         >
             <CircularProgress

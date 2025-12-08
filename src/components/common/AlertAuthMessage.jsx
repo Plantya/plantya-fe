@@ -38,7 +38,7 @@ const AlertAuthMessage = (props) => {
                             display: "flex",
                             alignItems: "center",
                             borderRadius: "10px",
-                            color: 'text.white',
+                            color: 'text.primary',
                             opacity: 0.9,
                             fontSize: '16px',
                         }}

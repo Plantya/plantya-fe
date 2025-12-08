@@ -79,6 +79,26 @@ const Sidebar = (props) => {
         });
     }, [location.pathname, props.isCollapsed, props.isMobileOpen, menuItems]);
 
+    useEffect(() => {
+        const disableBackgroundScroll = () => {
+            document.body.style.overflow = 'hidden';
+        };
+
+        const enableBackgroundScroll = () => {
+            document.body.style.overflow = 'unset';
+        };
+
+        if (props.isMobileOpen) {
+            disableBackgroundScroll();
+        } else {
+            enableBackgroundScroll();
+        }
+
+        return () => {
+            enableBackgroundScroll();
+        };
+    }, [props.isMobileOpen]);
+
 
     return (
         // Container 
@@ -88,7 +108,7 @@ const Sidebar = (props) => {
                 height: "100vh",
                 display: "flex",
                 flexDirection: "column",
-                backgroundColor: "background.secondary",
+                backgroundColor: "background.paper",
             }}
         >
 
@@ -100,7 +120,7 @@ const Sidebar = (props) => {
                     alignItems: "center",
                     justifyContent: "center",
                     borderBottom: "1px solid",
-                    borderBottomColor: 'background.line'
+                    borderBottomColor: 'action.active'
                 }}
             >
                 <img
@@ -133,7 +153,7 @@ const Sidebar = (props) => {
                         p: 2,
                         pb: 0,
                         borderBottom: "1px solid",
-                        borderBottomColor: 'background.line',
+                        borderBottomColor: 'action.active',
                         color: 'text.secondary',
                     }}
                 >
@@ -176,13 +196,13 @@ const Sidebar = (props) => {
                                         slotProps={{
                                             tooltip: {
                                                 sx: {
-                                                    backgroundColor: "background.hover",
+                                                    backgroundColor: "action.hover",
                                                     fontSize: '1rem'
                                                 }
                                             },
                                             arrow: {
                                                 sx: {
-                                                    color: 'background.hover',
+                                                    color: 'action.hover',
                                                 }
                                             },
                                             transition: { timeout: 500 },
@@ -215,19 +235,19 @@ const Sidebar = (props) => {
 
 
                                                 "&.Mui-selected": {
-                                                    backgroundColor: "background.hover",
+                                                    backgroundColor: "action.hover",
                                                     borderRadius: 35,
-                                                    color: 'text.white'
+                                                    color: 'text.primary'
                                                 },
                                                 "&:hover": {
-                                                    bgcolor: "background.hover",
-                                                    color: 'text.white',
+                                                    bgcolor: "action.hover",
+                                                    color: 'text.primary',
                                                     borderRadius: 35,
                                                     transition: "background-color 0.4s ease-in-out, color 0.4s ease-in-out"
                                                 },
                                                 "&.Mui-selected:hover": {
-                                                    bgcolor: "background.hover",
-                                                    color: 'text.white',
+                                                    bgcolor: "action.hover",
+                                                    color: 'text.primary',
                                                 },
 
                                             }}
@@ -327,17 +347,17 @@ const Sidebar = (props) => {
                                                             borderRadius: 35,
                                                             pl: 0,
                                                             "&.Mui-selected": {
-                                                                bgcolor: "background.hover",
-                                                                color: 'text.white'
+                                                                bgcolor: "action.hover",
+                                                                color: 'text.primary'
                                                             },
                                                             "&:hover": {
-                                                                bgcolor: "background.hover",
-                                                                color: 'text.white',
+                                                                bgcolor: "action.hover",
+                                                                color: 'text.primary',
                                                                 transition: "background-color 0.4s ease-in-out, color 0.4s ease-in-out"
                                                             },
                                                             "&.Mui-selected:hover": {
-                                                                bgcolor: "background.hover",
-                                                                color: 'text.white'
+                                                                bgcolor: "action.hover",
+                                                                color: 'text.primary'
                                                             },
                                                         }}
                                                     >
@@ -382,7 +402,7 @@ const Sidebar = (props) => {
                                                         width: '80%',
                                                         ml: '20%',
                                                         borderLeft: '1px solid',
-                                                        borderLeftColor: 'background.line',
+                                                        borderLeftColor: 'action.active',
                                                         pl: 1,
                                                     }}
                                                 >
@@ -401,17 +421,17 @@ const Sidebar = (props) => {
                                                                 borderRadius: 35,
                                                                 px: 0,
                                                                 "&.Mui-selected": {
-                                                                    bgcolor: "background.hover",
-                                                                    color: 'text.white'
+                                                                    bgcolor: "action.hover",
+                                                                    color: 'text.primary'
                                                                 },
                                                                 "&:hover": {
-                                                                    bgcolor: "background.hover",
-                                                                    color: 'text.white',
+                                                                    bgcolor: "action.hover",
+                                                                    color: 'text.primary',
                                                                     transition: "background-color 0.4s ease-in-out, color 0.4s ease-in-out"
                                                                 },
                                                                 "&.Mui-selected:hover": {
-                                                                    bgcolor: "background.hover",
-                                                                    color: 'text.white'
+                                                                    bgcolor: "action.hover",
+                                                                    color: 'text.primary'
                                                                 },
                                                             }}
                                                         >
@@ -499,7 +519,7 @@ const Sidebar = (props) => {
                                             tooltip: {
                                                 sx: {
                                                     bgcolor: "background.fourth",
-                                                    color: "text.white",
+                                                    color: "text.primary",
                                                     fontSize: "14px",
                                                     fontWeight: 600,
                                                     borderRadius: "8px",
@@ -526,20 +546,20 @@ const Sidebar = (props) => {
                                                 borderRadius: 35,
                                                 mb: 1,
                                                 "&.Mui-selected": {
-                                                    bgcolor: "background.hover",
+                                                    bgcolor: "action.hover",
                                                     borderRadius: 35,
-                                                    color: 'text.white'
+                                                    color: 'text.primary'
                                                 },
                                                 "&:hover":
                                                 {
-                                                    bgcolor: "background.hover",
+                                                    bgcolor: "action.hover",
                                                     borderRadius: 35,
-                                                    color: 'text.white',
+                                                    color: 'text.primary',
                                                     transition: "background-color 0.4s ease-in-out, color 0.4s ease-in-out"
                                                 },
                                                 "&.Mui-selected:hover": {
-                                                    bgcolor: "background.hover",
-                                                    color: 'text.white',
+                                                    bgcolor: "action.hover",
+                                                    color: 'text.primary',
                                                 },
                                                 ...(props.isCollapsed && {
                                                     px: 0,

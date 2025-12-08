@@ -100,6 +100,7 @@ export const appMenuStructure = [
                 component: LazyLoadRoutes(() => import("../pages/app002/MasterUser")),
                 icon: <PersonIcon />
             },
+            
         ],
     },
     {

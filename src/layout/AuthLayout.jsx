@@ -58,7 +58,7 @@ const AuthLayout = (props) => {
                     height: '100vh',
                     backgroundColor: "#inherit",
                     borderRight: "1px solid",
-                    borderRightColor: 'background.line',
+                    borderRightColor: 'action.active',
                     transform: isMobile && !isMobileOpen ? 'translateX(-100%)' : 'translateX(0)',
                     overflow: "visible",
                     transition: "width 0.3s ease, transform 0.3s ease",
@@ -93,7 +93,7 @@ const AuthLayout = (props) => {
                     display: "flex",
                     flexDirection: "column",
                     minHeight: "100vh",
-                    backgroundColor: "background.main",
+                    backgroundColor: "background.default",
                     transition: "margin-left 0.3s ease",
                 }}
             >
@@ -114,7 +114,7 @@ const AuthLayout = (props) => {
                     sx={{
                         flex: 1,
                         p: 3,
-                        backgroundColor: "background.main",
+                        backgroundColor: "background.default",
                         overflowY: "auto",
                     }}
                 >
@@ -135,13 +135,13 @@ const AuthLayout = (props) => {
                     width: 35,
                     height: 35,
                     borderRadius: '5px',
-                    backgroundColor: "background.secondary",
+                    backgroundColor: "background.paper",
                     border: "1px solid",
-                    borderColor: 'background.line',
+                    borderColor: 'action.active',
                     transition: "left 0.3s ease",
                     display: { xs: 'none', sm: 'flex' },
                     "&:hover": {
-                        bgcolor: "background.main",
+                        bgcolor: "background.default",
                     }
                 }}
             >

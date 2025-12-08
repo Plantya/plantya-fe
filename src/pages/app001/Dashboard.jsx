@@ -24,7 +24,7 @@ const Dashboard = () => {
                     maxWidth="xl"
                     sx={{
                         display: app001p01Page ? "block" : "none",
-                        bgcolor: 'background.error'
+                        bgcolor: 'secondary.main'
                     }}
                 >
                     <Typography variant="h4" gutterBottom>
@@ -35,7 +35,7 @@ const Dashboard = () => {
                     </Typography>
 
                     <Grid container spacing={2} sx={{ mt: 3 }}>
-                        <Grid item>
+                        <Grid >
                             <Button
                                 variant="contained"
                                 color="success"
@@ -47,7 +47,7 @@ const Dashboard = () => {
                                 Tampilkan Alert Sukses
                             </Button>
                         </Grid>
-                        <Grid item>
+                        <Grid >
                             <Button
                                 variant="contained"
                                 color="error"
@@ -59,7 +59,7 @@ const Dashboard = () => {
                                 Tampilkan Alert Error
                             </Button>
                         </Grid>
-                        <Grid item>
+                        <Grid >
                             <Button
                                 variant="contained"
                                 color="warning"

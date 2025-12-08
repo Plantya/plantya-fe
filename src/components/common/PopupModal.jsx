@@ -25,7 +25,7 @@ const PopupModal = (props) => {
                 sx={{
                     "& .MuiDialog-paper": {
                         borderRadius: "30px",
-                        backgroundColor: "background.hover",
+                        backgroundColor: "action.hover",
                         textAlign: "center",
                         padding: 2,
                     },

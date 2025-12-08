@@ -1,37 +1,62 @@
-// src/theme.jsx
-
 import { createTheme } from "@mui/material/styles";
+
+const baseColors = {
+  green: '#07AB0E',
+  red: '#DC3545',
+  blue: '#1976D2',
+  darkBlue: '#24427D',
+  white: '#FAFAFA',
+  grey: '#676767',
+  black: '#16181A',
+  deepBlack: '#121314',
+  line: '#2c2e31',
+  hover: '#1F1F1F',
+  yellow: "#ff8c00ff",
+};
 
 const globalTheme = createTheme({
   typography: {
     fontFamily: "Poppins, sans-serif",
   },
   palette: {
-    success: { main: '#07AB0E' },
-    error: { main: '#DC3545' },
-    info: { main: '#1976D2', secondary: '#24427D' },
-    secondary: { main: '#16181A' },
-    // primary: { main: '#1976D2' },
+    primary: {
+      main: baseColors.darkBlue
+    },
+    secondary: {
+      main: baseColors.black,
+    },
+    info: {
+      main: baseColors.blue,
+    },
+    success: {
+      main: baseColors.green,
+    },
+    error: {
+      main: baseColors.red,
+    },
+    warning: {
+      main: baseColors.yellow,
+    },
 
     background: {
-      main: "#121314", // Background utama
-      secondary: "#16181A", // Background Sidebar untuk Contrast
-      line: '#2c2e31', // Line Coloring
-      hover: '#1F1F1F', // Background Hovering Sidebar
-      success: '#07AB0E',
-      error: '#DC3545',
-      warning: 'yellow',
-      info: '#1976D2',
+      default: baseColors.deepBlack,
+      paper: baseColors.black,
     },
 
     text: {
-      white: "#FAFAFA",
-      secondary: "#676767",
-      success: '#07AB0E',
-      danger: '#DC3545',
-      warning: 'yellow',
-      info: '#1976D2',
+      primary: baseColors.white,
+      secondary: baseColors.grey,
     },
+
+    action: {
+      hover: baseColors.hover,
+      active: baseColors.line,
+    },
+
+    custom: {
+      line: baseColors.line,
+    }
+
   },
 
   components: {
@@ -43,7 +68,8 @@ const globalTheme = createTheme({
           // Styling Textfield for Login and Register
           "&.auth-field": {
             "& .MuiOutlinedInput-root": {
-              backgroundColor: theme.palette.background.secondary,
+              marginTop: 1,
+              backgroundColor: theme.palette.background.paper,
               borderRadius: "15px",
               transition: "all 0.3s ease",
 
@@ -86,7 +112,7 @@ const globalTheme = createTheme({
                 boxShadow: "0 0 0 1000px transparent inset !important",
                 backgroundColor: "transparent !important",
                 backgroundImage: "none !important",
-                WebkitTextFillColor: `${theme.palette.text.white} !important`,
+                WebkitTextFillColor: `${theme.palette.text.primary} !important`,
                 transition: "background-color 5000s ease-in-out 0s !important",
               },
               "& input:-webkit-autofill::placeholder": {
@@ -105,7 +131,7 @@ const globalTheme = createTheme({
                 backgroundColor: "transparent",
               },
               "& input:not(:placeholder-shown)": {
-                color: theme.palette.text.white,
+                color: theme.palette.text.primary,
               },
             },
             "& .MuiInputBase-input::placeholder": {
@@ -129,8 +155,8 @@ const globalTheme = createTheme({
         root: ({ theme }) => ({
           // Style for Login / Regist Button
           '&.auth-button': {
-            color: theme.palette.text.white,
-            backgroundColor: theme.palette.info.secondary,
+            color: theme.palette.text.primary,
+            backgroundColor: theme.palette.primary.main,
             borderStyle: 'none',
             borderRadius: '15px',
             fontWeight: 600,
@@ -145,7 +171,7 @@ const globalTheme = createTheme({
 
           // Button Signup / Sign in Direction
           '&.linkto-button': {
-            fontWeight: 'bold',
+            fontWeight: 600,
             color: theme.palette.info.main,
             textTransform: "none",
             "&:hover": {
@@ -163,7 +189,8 @@ const globalTheme = createTheme({
         root: ({ theme }) => ({
           // 
           '&.auth-divider': {
-            border: '1px solid theme.palette.background.line',
+            border: '1px solid',
+            borderColor: theme.palette.custom.line,
           },
         }),
       }
@@ -173,9 +200,9 @@ const globalTheme = createTheme({
       styleOverrides: {
         paper: ({ theme }) => ({
           '&.sidebar-popover': {
-            backgroundColor: theme.palette.background.secondary,
+            backgroundColor: theme.palette.background.paper,
             borderRadius: 10,
-            border: `1px solid ${theme.palette.background.line}`,
+            border: `1px solid ${theme.palette.custom.line}`,
             transition: "opacity 0.5s ease-in-out, transform 0.5s ease-in-out"
           }
         })
