@@ -154,7 +154,7 @@ const Sidebar = (props) => {
                         pb: 0,
                         borderBottom: "1px solid",
                         borderBottomColor: 'action.active',
-                        color: 'text.secondary',
+                        color: 'text.secondary', /////
                     }}
                 >
                     <Typography
@@ -237,17 +237,17 @@ const Sidebar = (props) => {
                                                 "&.Mui-selected": {
                                                     backgroundColor: "action.hover",
                                                     borderRadius: 35,
-                                                    color: 'text.primary'
+                                                    color: 'text.secondary'
                                                 },
                                                 "&:hover": {
                                                     bgcolor: "action.hover",
-                                                    color: 'text.primary',
+                                                    color: 'text.secondary',
                                                     borderRadius: 35,
                                                     transition: "background-color 0.4s ease-in-out, color 0.4s ease-in-out"
                                                 },
                                                 "&.Mui-selected:hover": {
                                                     bgcolor: "action.hover",
-                                                    color: 'text.primary',
+                                                    color: 'text.secondary',
                                                 },
 
                                             }}
@@ -333,7 +333,7 @@ const Sidebar = (props) => {
                                                     display: 'flex',
                                                     flexDirection: 'column',
                                                     gap: 1,
-                                                    color: 'text.secondary'
+                                                    color: 'text.secondary' /////
                                                 }}
                                             >
                                                 {item.sub?.map((sub, subIndex) => (
@@ -348,16 +348,16 @@ const Sidebar = (props) => {
                                                             pl: 0,
                                                             "&.Mui-selected": {
                                                                 bgcolor: "action.hover",
-                                                                color: 'text.primary'
+                                                                color: 'text.secondary'
                                                             },
                                                             "&:hover": {
                                                                 bgcolor: "action.hover",
-                                                                color: 'text.primary',
+                                                                color: 'text.secondary',
                                                                 transition: "background-color 0.4s ease-in-out, color 0.4s ease-in-out"
                                                             },
                                                             "&.Mui-selected:hover": {
                                                                 bgcolor: "action.hover",
-                                                                color: 'text.primary'
+                                                                color: 'text.secondary'
                                                             },
                                                         }}
                                                     >
@@ -422,16 +422,16 @@ const Sidebar = (props) => {
                                                                 px: 0,
                                                                 "&.Mui-selected": {
                                                                     bgcolor: "action.hover",
-                                                                    color: 'text.primary'
+                                                                    color: 'text.secondary'
                                                                 },
                                                                 "&:hover": {
                                                                     bgcolor: "action.hover",
-                                                                    color: 'text.primary',
+                                                                    color: 'text.secondary',
                                                                     transition: "background-color 0.4s ease-in-out, color 0.4s ease-in-out"
                                                                 },
                                                                 "&.Mui-selected:hover": {
                                                                     bgcolor: "action.hover",
-                                                                    color: 'text.primary'
+                                                                    color: 'text.secondary'
                                                                 },
                                                             }}
                                                         >
@@ -475,7 +475,7 @@ const Sidebar = (props) => {
                 <Box
                     sx={{
                         p: 2,
-                        color: 'text.secondary',
+                        color: 'text.secondary', /////
                     }}
                 >
                     <Typography
@@ -519,7 +519,7 @@ const Sidebar = (props) => {
                                             tooltip: {
                                                 sx: {
                                                     bgcolor: "background.fourth",
-                                                    color: "text.primary",
+                                                    color: "text.secondary",
                                                     fontSize: "14px",
                                                     fontWeight: 600,
                                                     borderRadius: "8px",
@@ -548,18 +548,18 @@ const Sidebar = (props) => {
                                                 "&.Mui-selected": {
                                                     bgcolor: "action.hover",
                                                     borderRadius: 35,
-                                                    color: 'text.primary'
+                                                    color: 'text.secondary'
                                                 },
                                                 "&:hover":
                                                 {
                                                     bgcolor: "action.hover",
                                                     borderRadius: 35,
-                                                    color: 'text.primary',
+                                                    color: 'text.secondary',
                                                     transition: "background-color 0.4s ease-in-out, color 0.4s ease-in-out"
                                                 },
                                                 "&.Mui-selected:hover": {
                                                     bgcolor: "action.hover",
-                                                    color: 'text.primary',
+                                                    color: 'text.secondary',
                                                 },
                                                 ...(props.isCollapsed && {
                                                     px: 0,

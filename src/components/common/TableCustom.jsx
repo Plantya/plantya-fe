@@ -85,23 +85,29 @@ const TableCustom = (props) => {
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
             // backgroundColor: theme.palette.background.secondary,
-            color: theme.palette.text.primary,
-            borderBottom: `1px solid ${theme.palette.custom.line}`
+            color: theme.palette.text.secondary,
+            backgroundColor: '#807d7dff',
+            borderBottom: `1px solid ${theme.palette.custom.line}`,
+
 
 
         },
         [`&.${tableCellClasses.body}`]: {
             fontSize: 14,
+            hover: theme.palette.text.primary
 
         },
     }));
 
     return (
         <>
-            <TableContainer component={Paper} sx={{
-                bgcolor: 'red',
-                borderRadius: 3
-            }}>
+            <TableContainer
+                sx={{
+                    // bgcolor: 'red',
+                    borderRadius: 3,
+                    overflow: 'hidden',
+                    border: '1px solid'
+                }}>
                 {loading && (
                     <Box sx={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(255, 255, 255, 0.7)', zIndex: 1 }}>
                         <CircularProgress />
@@ -113,8 +119,9 @@ const TableCustom = (props) => {
                     borderColor: 'custom.line',
                 }}>
                     {/* ... TableHead dan TableBody ... */}
-                    <TableHead>
-                        <TableRow>
+                    <TableHead >
+                        <TableRow
+                        >
                             {props.columns.map((column) => (
                                 <StyledTableCell key={column.dataField} align={column.align || 'left'} style={{ ...column.headerStyle }} sortDirection={props.searchGet.sort === column.dataField ? props.searchGet.order : false}>
                                     {column.sort ? (
@@ -128,7 +135,12 @@ const TableCustom = (props) => {
                     </TableHead>
                     <TableBody>
                         {props.appdata.map((row) => (
-                            <TableRow hover role="checkbox" tabIndex={-1} key={row[props.keyField]} onClick={(event) => handleRowClick(event, row)}
+                            <TableRow
+                                // hover={true}
+                                role="checkbox"
+                                tabIndex={-1}
+                                key={row[props.keyField]}
+                                onClick={(event) => handleRowClick(event, row)}
                                 sx={{
                                     cursor: props.rowEvents ? 'pointer' : 'default',
                                     borderBottom: '1px solid',          // Tambahkan garis bawah
@@ -157,7 +169,7 @@ const TableCustom = (props) => {
                         )}
                     </TableBody>
                 </Table>
-            </TableContainer>
+            </TableContainer >
             <TablePagination
                 rowsPerPageOptions={[5, 10, 20, 25]}
                 component="div"

@@ -10,3 +10,9 @@ const ListApi = {
 };
 
 export default ListApi;
+
+
+// PAKAI EXPORT CONST (res => (res) api path)
+// PAKAI EXPORT CONST (res => (res) api path)
+// PAKAI EXPORT CONST (res => (res) api path)
+// PAKAI EXPORT CONST (res => (res) api path)

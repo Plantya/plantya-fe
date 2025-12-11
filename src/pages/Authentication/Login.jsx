@@ -90,8 +90,8 @@ const Login = () => {
             setMessage("");
 
             try {
-                const response = await handleLogin(values)
-                // const response = await handeLoginState(values)
+                // const response = await handleLogin(values)
+                const response = await handeLoginState(values)
 
                 login(response.data.data)
                 navigate("/")

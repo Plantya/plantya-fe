@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Container, Box, Typography, Grid, Paper } from "@mui/material";
+import { Container, Box, Typography, Grid, Paper, Card, CardHeader, CardContent } from "@mui/material";
 import { Button } from "@mui/material";
 import RootPageCustom from "../../components/common/RootPageCustom";
 import TableCustom from "../../components/common/TableCustom";
@@ -197,46 +197,77 @@ const MasterUser = () => {
                 msgStateGetStatus={app002MsgStatus}
                 setFirstRender={setFirstRender}
             >
-                <Container maxWidth="xxl" sx={{ display: app002p01Page ? "block" : "none" }}>
-                    <Typography variant="h4" gutterBottom>
-                        Master User
-                    </Typography>
+                <Container
+                    disableGutters
+                    maxWidth="xl" sx={{
+                        display: app002p01Page ? "block" : "none",
+                        // backgroundColor:'red'
+                    }}
 
-                    {/* Bungkus dengan Paper agar lebih rapi */}
-                    <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', 
-                        bgcolor: 'background.default' 
-                        }}>
-                        <Grid container justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
-                            <Grid item>
-                                <Typography variant="h6">Daftar User</Typography>
-                            </Grid>
-                            <Grid item>
-                                <Button variant="contained" color="primary">
-                                    <i className="bx bx-plus font-size-16 align-middle me-2"></i>
-                                    Tambah User
-                                </Button>
-                            </Grid>
-                        </Grid>
-
-                        {/* 6. Gunakan komponen TableCustomMUI */}
-                        <TableCustom
-                            keyField="userId"
-                            columns={app002UserColumns}
-                            appdata={app002UserData.data?.user || []}
-                            // appdata={app028p01GradeData.data != null ? app028p01GradeData.data.grade : []}
-                            // appdataTotal={app028p01GradeData.data != null ? app028p01GradeData.data.gradetotal : 0}
-                            appdataTotal={app002UserData.data?.total || 0}
-                            searchSet={setApp002p01TableSearch}
-                            searchGet={app002p01TableSearch}
-                            setData={setApp002UserData}
-                        // urlHelper={getUserListDummy}
+                >
+                    {/* <Paper
+                        elevation={4}
+                        sx={{
+                            p: 2,
+                            display: 'flex',
+                            borderRadius: '10px',
+                            flexDirection: 'column',
+                            bgcolor: 'background.default',
+                            // backgroundColor:'none'
+                        }}> */}
+                    <Card sx={{
+                        bgcolor: 'background.default',
+                        color: 'text.secondary'
+                    }}>
+                        <CardHeader
+                            sx={{ backgroundColor: 'background.paper', borderTopLeftRadius: '10px', borderTopRightRadius: '10px' }}
+                            title="Master User"
                         />
-                    </Paper>
+
+                        {/* Bungkus dengan Paper agar lebih rapi */}
+                        <CardContent sx={{
+                            bgcolor: '',
+                            color: 'text.primary'
+                        }}>
+                            <Grid container justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
+                                <Grid item>
+                                    <Typography variant="h6">Filtering</Typography>
+                                </Grid>
+                        
+                            </Grid>
+                            <Grid container justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
+                                <Grid item>
+                                    <Typography variant="h6">Daftar User</Typography>
+                                </Grid>
+                                <Grid item>
+                                    <Button variant="contained" color="primary">
+                                        <i className="bx bx-plus font-size-16 align-middle me-2"></i>
+                                        Tambah User
+                                    </Button>
+                                </Grid>
+                            </Grid>
+
+                            {/* 6. Gunakan komponen TableCustomMUI */}
+                            <TableCustom
+                                keyField="userId"
+                                columns={app002UserColumns}
+                                appdata={app002UserData.data?.user || []}
+                                // appdata={app028p01GradeData.data != null ? app028p01GradeData.data.grade : []}
+                                // appdataTotal={app028p01GradeData.data != null ? app028p01GradeData.data.gradetotal : 0}
+                                appdataTotal={app002UserData.data?.total || 0}
+                                searchSet={setApp002p01TableSearch}
+                                searchGet={app002p01TableSearch}
+                                setData={setApp002UserData}
+                            // urlHelper={getUserListDummy}
+                            />
+                        </CardContent>
+                    </Card>
+                    {/* </Paper> */}
 
                     {/* Bagian untuk tombol alert bisa dipindahkan ke bawah atau dihapus jika tidak perlu */}
                 </Container>
             </RootPageCustom>
-        </React.Fragment>
+        </React.Fragment >
     );
 }
 

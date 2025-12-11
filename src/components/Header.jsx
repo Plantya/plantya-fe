@@ -79,7 +79,8 @@ const Header = (props) => {
                     boxShadow: "0 1px 4px rgba(0,0,0,0.1)",
                     height: props.headerHeight,
                     borderBottom: "1px solid",
-                    borderBottomColor: 'action.active'
+                    borderBottomColor: 'action.active',
+                    color:'text.primary'
                 }}
             >
                 <Toolbar
