@@ -11,14 +11,14 @@ const baseColors = {
   deepBlack: '#121314',
   line: '#2c2e31',
   yellow: "#ff8c00ff",
-  
+
   bgSidebar: '#2E4839',
   bgHeader: '#FAFAFA  ',
   bgContent: '#f0eff4',
-  
+
   textPrimary: '#000000',
   textSecondary: '#FFFFFF',
-  
+
   hover: '#1F1F1F',
 
 

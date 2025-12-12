@@ -65,7 +65,7 @@ export const appMenuStructure = [
         ],
     },
     {
-        text: "Header Test",
+        text: "Header Test asdasdsasadasd",
         icon: <FactCheckOutlinedIcon />,
         section: "main",
         sub: [
@@ -100,7 +100,25 @@ export const appMenuStructure = [
                 component: LazyLoadRoutes(() => import("../pages/app002/MasterUser")),
                 icon: <PersonIcon />
             },
-            
+            {
+                text: "Test 5",
+                path: "/test",
+                component: LazyLoadRoutes(() => import("../pages/app002/MasterUser")),
+                icon: <PersonIcon />
+            },
+            {
+                text: "Test 5",
+                path: "/test",
+                component: LazyLoadRoutes(() => import("../pages/app002/MasterUser")),
+                icon: <PersonIcon />
+            },
+            {
+                text: "Test 5",
+                path: "/test",
+                component: LazyLoadRoutes(() => import("../pages/app002/MasterUser")),
+                icon: <PersonIcon />
+            },
+
         ],
     },
     {

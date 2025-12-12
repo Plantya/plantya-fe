@@ -80,7 +80,7 @@ const Header = (props) => {
                     height: props.headerHeight,
                     borderBottom: "1px solid",
                     borderBottomColor: 'action.active',
-                    color:'text.primary'
+                    color: 'text.primary'
                 }}
             >
                 <Toolbar
@@ -161,7 +161,7 @@ const Header = (props) => {
                             }}
                         >
                             <NotificationsNoneOutlinedIcon sx={{
-                                fontSize: '30px'
+                                fontSize: '25px'
                             }} />
                         </IconButton>
 
@@ -186,7 +186,7 @@ const Header = (props) => {
                             sx={{ p: 1 }}
                         >
                             <AccountCircleOutlinedIcon sx={{
-                                fontSize: '30px'
+                                fontSize: '25px'
                             }} />
                         </IconButton>
                     </Box>

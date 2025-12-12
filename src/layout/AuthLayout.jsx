@@ -9,8 +9,8 @@ import CodeIcon from '@mui/icons-material/Code';
 
 
 const SIDEBAR_COLLAPSE_WIDTH = 75;
-const SIDEBAR_WIDTH = 280;
-const HEADER_HEIGHT = 75;
+const SIDEBAR_WIDTH = 250;
+const HEADER_HEIGHT = 70;
 
 const AuthLayout = (props) => {
 
@@ -55,7 +55,7 @@ const AuthLayout = (props) => {
                     position: "fixed",
                     top: 0,
                     left: 0,
-                    height: '100vh',
+                    height: '100%',
                     backgroundColor: "#inherit",
                     borderRight: "1px solid",
                     borderRightColor: 'action.active',
