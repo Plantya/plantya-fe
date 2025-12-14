@@ -13,29 +13,40 @@ const MasterUser = () => {
     const [app002MsgStatus, setApp002setMsgStatus] = useState("");
     const [firstRender, setFirstRender] = useState(false)
     const [app002p01Page, setApp002p01Page] = useState(true);
-
-    // State untuk data akan tetap sama
-    const [app002p01UserData, setApp002p01UserData] = useState([]); // Akan menampung SEMUA data dari API
-    const [app002p01UserTotalData, setApp002p01UserTotalData] = useState(0) // Akan menampung total data
+    const [app002p01UserData, setApp002p01UserData] = useState([]);
+    const [app002p01UserTotalData, setApp002p01UserTotalData] = useState(0)
     const [loading, setLoading] = useState(false);
 
-    // State untuk parameter kontrol pagination dan sorting akan tetap sama
+    // Header Column
+    const app002UserColumns = [
+        { dataField: "user_id", text: "User ID", sort: true, align: "center", headerStyle: { textAlign: 'center' } },
+        { dataField: "name", text: "Username", sort: true, headerStyle: { textAlign: 'center' } },
+        { dataField: "role", text: "Role", sort: true, align: "center", headerStyle: { textAlign: 'center' } },
+        { dataField: "email", text: "Email", sort: true, headerStyle: { textAlign: 'center' } },
+        {
+            dataField: "action", text: "Action", headerStyle: { textAlign: 'center', width: '120px' },
+            formatter: (cellContent, row) => (
+                <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
+                    <IconButton aria-label="edit" size="small" onClick={() => console.log('Edit user:', row)} color="info"><EditIcon fontSize="inherit" /></IconButton>
+                    <IconButton aria-label="delete" size="small" onClick={() => console.log('Delete user:', row)} color="error"><DeleteIcon fontSize="inherit" /></IconButton>
+                </Box>
+            ),
+        },
+    ];
+
     const [app002p01UserDataParam, setApp002p01UserDataParam] = useState(
         {
-            page: 1,       // 1-based
-            limit: 10,
+            page: 1,
+            size: 10,
             sort: "user_id",
             order: "asc",
+            search: "",
+            role: "ADMIN",
         }
     )
 
-    // --- PERUBAHAN 1: GUNAKAN SATU useEffect UNTUK MENGAMBIL SEMUA DATA ---
-    // useEffect yang ini dihapus karena menyebabkan panggilan API berulang kali
-    // useEffect(() => {
-    //     getUserList();
-    // }, [app002p01UserDataParam]);
 
-    // Gunakan useEffect ini untuk mengambil data hanya sekali saat komponen dimuat
+    // Call API
     useEffect(() => {
         fetchAllUsers();
     }, []);
@@ -43,12 +54,12 @@ const MasterUser = () => {
     const fetchAllUsers = useCallback(async () => {
         setLoading(true);
         try {
-            // API dipanggil TANPA parameter untuk mendapatkan semua data
-            const response = await getUser({});
+            const response = await getUser(app002p01UserDataParam);
             console.log(response);
-            const allData = response.data || response || []; // Sesuaikan dengan struktur response API Anda
-            setApp002p01UserData(allData);
-            setApp002p01UserTotalData(allData.length);
+
+            debugger
+            setApp002p01UserData(response?.data?.data ? response.data.data : []);
+            setApp002p01UserTotalData(response?.data?.count_data ? response.data.count_data : 0);
         } catch (error) {
             console.error("Gagal mengambil data:", error);
             setApp002p01UserData([]);
@@ -58,26 +69,6 @@ const MasterUser = () => {
         }
     }, []);
 
-    // --- PERUBAHAN 2: GUNAKAN useMemo UNTUK MEMPROSES DATA DI CLIENT-SIDE ---
-    // Hook ini akan mengurutkan dan memotong data sesuai dengan parameter yang ada
-    const processedData = useMemo(() => {
-        let sortedData = [...app002p01UserData]; // Buat salinan agar tidak mengubah state asli
-
-        // 1. Lakukan sorting
-        sortedData.sort((a, b) => {
-            const valA = a[app002p01UserDataParam.sort];
-            const valB = b[app002p01UserDataParam.sort];
-            if (valA < valB) return app002p01UserDataParam.order === 'asc' ? -1 : 1;
-            if (valA > valB) return app002p01UserDataParam.order === 'asc' ? 1 : -1;
-            return 0;
-        });
-
-        // 2. Lakukan pagination (slice)
-        const startIndex = (app002p01UserDataParam.page - 1) * app002p01UserDataParam.limit;
-        const endIndex = startIndex + app002p01UserDataParam.limit;
-        return sortedData.slice(startIndex, endIndex);
-
-    }, [app002p01UserData, app002p01UserDataParam]); // Akan dihitung ulang jika data atau parameter berubah
 
     // --- Handler untuk mengubah state akan tetap sama ---
     const handleChangePage = (event, newPage) => {
@@ -99,22 +90,7 @@ const MasterUser = () => {
         }));
     };
 
-    // --- DEFINISIKAN KOLOM TABEL (Tetap Sama) ---
-    const app002UserColumns = [
-        { dataField: "user_id", text: "User ID", sort: true, align: "center", headerStyle: { textAlign: 'center' } },
-        { dataField: "name", text: "Username", sort: true, headerStyle: { textAlign: 'center' } },
-        { dataField: "role", text: "Role", sort: true, align: "center", headerStyle: { textAlign: 'center' } },
-        { dataField: "email", text: "Email", sort: true, headerStyle: { textAlign: 'center' } },
-        {
-            dataField: "action", text: "Action", headerStyle: { textAlign: 'center', width: '120px' },
-            formatter: (cellContent, row) => (
-                <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
-                    <IconButton aria-label="edit" size="small" onClick={() => console.log('Edit user:', row)} color="info"><EditIcon fontSize="inherit" /></IconButton>
-                    <IconButton aria-label="delete" size="small" onClick={() => console.log('Delete user:', row)} color="error"><DeleteIcon fontSize="inherit" /></IconButton>
-                </Box>
-            ),
-        },
-    ];
+
 
     // --- PERUBAHAN 3: KIRIM DATA YANG SUDAH DIPROSES KE TABEL ---
     return (
@@ -141,9 +117,7 @@ const MasterUser = () => {
                             <TableCustom
                                 keyField="user_id"
                                 columns={app002UserColumns}
-                                // Gunakan processedData yang sudah di-sort dan di-paginate
-                                appdata={processedData}
-                                // Total data adalah SELURUH data yang ada di app002p01UserData
+                                appdata={app002p01UserData}
                                 appdataTotal={app002p01UserTotalData}
                                 loading={loading}
                                 page={app002p01UserDataParam.page - 1}

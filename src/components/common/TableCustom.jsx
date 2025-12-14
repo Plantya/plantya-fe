@@ -10,20 +10,8 @@ import {
     CircularProgress, Typography
 } from "@mui/material";
 
-const TableCustom = ({
-    columns,
-    keyField,
-    appdata,
-    appdataTotal,
-    loading,
-    page,           // 0-based
-    rowsPerPage,
-    onPageChange,
-    onRowsPerPageChange,
-    sortField,
-    sortOrder,
-    onRequestSort,
-}) => {
+// Menggunakan props langsung tanpa destrukturizing
+const TableCustom = (props) => {
 
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
@@ -39,7 +27,7 @@ const TableCustom = ({
     return (
         <>
             <TableContainer sx={{ borderRadius: 3, overflow: 'hidden', border: '1px solid', position: 'relative' }}>
-                {loading && (
+                {props.loading && (
                     <Box sx={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(255, 255, 255, 0.7)', zIndex: 1 }}>
                         <CircularProgress />
                     </Box>
@@ -47,18 +35,18 @@ const TableCustom = ({
                 <Table aria-label="customized table" sx={{ borderLeft: '1px solid', borderRight: '1px solid', borderColor: 'custom.line' }}>
                     <TableHead>
                         <TableRow>
-                            {columns.map((column) => (
+                            {props.columns.map((column) => (
                                 <StyledTableCell
                                     key={column.dataField}
                                     align={column.align || 'left'}
                                     style={{ ...column.headerStyle }}
-                                    sortDirection={sortField === column.dataField ? sortOrder : false}
+                                    sortDirection={props.sortField === column.dataField ? props.sortOrder : false}
                                 >
                                     {column.sort ? (
                                         <TableSortLabel
-                                            active={sortField === column.dataField}
-                                            direction={sortField === column.dataField ? sortOrder : 'asc'}
-                                            onClick={() => onRequestSort(null, column.dataField)}
+                                            active={props.sortField === column.dataField}
+                                            direction={props.sortField === column.dataField ? props.sortOrder : 'asc'}
+                                            onClick={() => props.onRequestSort(null, column.dataField)}
                                         >
                                             {column.text}
                                         </TableSortLabel>
@@ -68,9 +56,9 @@ const TableCustom = ({
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {appdata.map((row) => (
-                            <TableRow hover role="checkbox" tabIndex={-1} key={row[keyField]} sx={{ borderBottom: '1px solid', borderColor: 'custom.line' }}>
-                                {columns.map((column) => {
+                        {props.appdata.map((row) => (
+                            <TableRow hover role="checkbox" tabIndex={-1} key={row[props.keyField]} sx={{ borderBottom: '1px solid', borderColor: 'custom.line' }}>
+                                {props.columns.map((column) => {
                                     const value = row[column.dataField];
                                     return (
                                         <TableCell key={column.dataField} align={column.align || 'left'} sx={{ borderBottom: 'none' }}>
@@ -80,9 +68,9 @@ const TableCustom = ({
                                 })}
                             </TableRow>
                         ))}
-                        {appdata.length === 0 && !loading && (
+                        {props.appdata.length === 0 && !props.loading && (
                             <TableRow>
-                                <TableCell colSpan={columns.length} align="center">
+                                <TableCell colSpan={props.columns.length} align="center">
                                     <Typography variant="body2">No records to display</Typography>
                                 </TableCell>
                             </TableRow>
@@ -93,16 +81,17 @@ const TableCustom = ({
             <TablePagination
                 rowsPerPageOptions={[5, 10, 20, 25]}
                 component="div"
-                count={appdataTotal}
-                rowsPerPage={rowsPerPage}
-                page={page} // Sudah 0-based
-                onPageChange={onPageChange}
-                onRowsPerPageChange={onRowsPerPageChange}
+                count={props.appdataTotal}
+                rowsPerPage={props.rowsPerPage}
+                page={props.page} // Sudah 0-based
+                onPageChange={props.onPageChange}
+                onRowsPerPageChange={props.onRowsPerPageChange}
             />
         </>
     );
 };
 
+// PropTypes tetap sama
 TableCustom.propTypes = {
     columns: PropTypes.array.isRequired,
     keyField: PropTypes.string.isRequired,
