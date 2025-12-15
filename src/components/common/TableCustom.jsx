@@ -146,7 +146,7 @@ const TableCustom = (props) => {
                 </Table>
             </TableContainer>
 
-            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", mt: 2 }}>
+            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", mt: 2, px: 1 }}>
                 <Typography variant="body2">
                     Showing {from} to {to} of {props.appdataTotal} entries
                 </Typography>

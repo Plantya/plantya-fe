@@ -113,6 +113,7 @@ const MasterUser = () => {
                                 <Grid justifyContent="start" alignItems="center" sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
                                     <TextField placeholder="Search" sx={{ width: '200px' }} />
                                     <TextField placeholder="Role" sx={{ width: '200px' }} />
+                                    <TextField placeholder="Status" sx={{ width: '200px' }} />
                                     <Button variant="contained" color="primary"><i className="bx bx-plus font-size-16 align-end me-2"></i>Export</Button>
                                     <Button variant="contained" color="primary"><i className="bx bx-plus font-size-16 align-end me-2"></i>Tambah User</Button>
                                 </Grid>
