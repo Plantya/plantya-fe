@@ -11,15 +11,14 @@ import { Icon } from "@iconify/react";
 const MasterUser = () => {
     const [firstRender, setFirstRender] = useState(false)
     const [app002p01Page, setApp002p01Page] = useState(true);
-
     const [app002Msg, setApp002setMsg] = useState("");
     const [app002MsgStatus, setApp002setMsgStatus] = useState("");
-
-    // Table Data and Loading
     const [loadingData, setLoadingData] = useState(false);
     const [app002p01UserData, setApp002p01UserData] = useState([]);
     const [app002p01UserTotalData, setApp002p01UserTotalData] = useState(0)
     const [totalPage, setTotalPage] = useState(0)
+    const [search, setSearch] = useState("")
+    const [role, setRole] = useState("")
 
     // Get All Param
     const [app002p01UserDataParam, setApp002p01UserDataParam] = useState(
@@ -76,27 +75,27 @@ const MasterUser = () => {
         },
     ];
 
-    const getAllUser = useCallback(async () => {
+    const getAllUser = useCallback(async (param) => {
         setLoadingData(true);
         try {
-            const response = await getUser(app002p01UserDataParam);
-            if (response?.data) {
-                setApp002p01UserData(response?.data?.data ? response.data.data : []);
-                setApp002p01UserTotalData(response?.data?.count_data ? response.data.count_data : 0);
-                setTotalPage(response?.data?.total_pages ? response.data?.total_pages : 0);
-            }
+            const response = await getUser(param);
+
+            setApp002p01UserData(response?.data?.data ? response.data.data : []);
+            setApp002p01UserTotalData(response?.data?.count_data ? response.data.count_data : 0);
+            setTotalPage(response?.data?.total_pages ? response.data?.total_pages : 0);
+
         } catch (error) {
             console.error("Gagal mengambil data:", error);
 
         } finally {
             setLoadingData(false);
         }
-    }, [app002p01UserDataParam]);
+    });
 
     // Call API
     useEffect(() => {
-        getAllUser();
-    }, [getAllUser]);
+        getAllUser(app002p01UserDataParam);
+    }, [app002p01UserDataParam]);
 
     // Handle Page, Rows, and Sort Function
     const handleChangePage = (newPage) => {
@@ -124,7 +123,6 @@ const MasterUser = () => {
     };
 
     // Search and Filtering
-    const [role, setRole] = useState("")
     const roleOptions = [
         { value: "ADMIN", label: "Admin" },
         { value: "USER", label: "User" },
@@ -132,36 +130,26 @@ const MasterUser = () => {
     ];
     const handleRoleChange = (event) => {
         debugger
-        setRole(event.target.value)
+        setRole(event)
         setSearch("")
-    }
 
-    useEffect(() => {
         setApp002p01UserDataParam(prev => ({
             ...prev,
             "page": 1,
-            "size": 10,
-            "sort": "",
-            "order": "asc",
-            "role": role,
+            "role": event,
             "search": ""
         }))
-    }, [role])
+    }
 
-    const [search, setSearch] = useState("")
-    const handleSearchInputChange = (event) => {
-        setSearch(event.target.value);
-    };
-    const updateSearch = () => {
+    const handleSearchState = () => {
         setApp002p01UserDataParam(prev => ({
             ...prev,
-            "page": 1,
-            "size": 10,
-            "sort": "",
-            "order": "asc",
-            "search": search
+            page: 1,
+            search: search
         }));
-    };
+    }
+
+
 
 
     return (
@@ -180,7 +168,7 @@ const MasterUser = () => {
                         py: 1,
                         px: 2,
                     }}
-                    
+
                 >
                     <Stack spacing={2}>
                         <Grid
@@ -203,10 +191,12 @@ const MasterUser = () => {
                                     fullWidth
                                     placeholder="Search"
                                     value={search}
-                                    onChange={handleSearchInputChange}
-                                    onKeyDown={(event) => {
-                                        if (event.key === 'Enter') {
-                                            updateSearch()
+                                    onChange={(e) => {
+                                        setSearch(e.target.value)
+                                    }}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter') {
+                                            handleSearchState()
                                         }
                                     }}
                                     size="small"
@@ -234,7 +224,7 @@ const MasterUser = () => {
                                             endAdornment: (
                                                 <IconButton
                                                     aria-label="search button"
-                                                    onClick={updateSearch}
+                                                    onClick={handleSearchState}
                                                     edge="end"
                                                     size="small"
                                                 >
@@ -253,11 +243,7 @@ const MasterUser = () => {
                                     options={roleOptions}
                                     getOptionLabel={(option) => option.label}
                                     value={roleOptions.find((opt) => opt.value === role) || null}
-                                    onChange={(event, newValue) => {
-                                        handleRoleChange({
-                                            target: { value: newValue ? newValue.value : "" }
-                                        });
-                                    }}
+                                    onChange={(event, newValue) => { handleRoleChange(newValue ? newValue.value : ""); }}
                                     renderInput={(params) => (
                                         <TextField
                                             {...params}
