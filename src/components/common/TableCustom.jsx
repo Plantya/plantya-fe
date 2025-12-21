@@ -11,7 +11,6 @@ import {
     TableContainer,
     TableHead,
     TableRow,
-    TableSortLabel,
     Box,
     CircularProgress,
     Typography,
@@ -21,11 +20,15 @@ import {
     MenuItem,
 } from "@mui/material";
 import { Icon } from '@iconify/react';
-
-
+import chevronDoubleLeft from '@iconify/icons-mdi/chevron-double-left';
+import chevronDoubleRight from '@iconify/icons-mdi/chevron-double-right';
+import chevronLeft from '@iconify/icons-mdi/chevron-left';
+import chevronRight from '@iconify/icons-mdi/chevron-right';
+import sortUp from "@iconify/icons-fa/sort-up";
+import sortDown from "@iconify/icons-fa/sort-down";
+import sort from "@iconify/icons-fa/sort";
 
 const TableCustom = (props) => {
-
     const [page, setPage] = useState(props.page || 0)
     const [rowsPerPage, setRowsPerPage] = useState(props.rowsPerPage || 10)
     const [sortField, setSortField] = useState(props.sortField || '');
@@ -77,8 +80,9 @@ const TableCustom = (props) => {
 
     const { from, to } = calculateRange();
 
-
-
+    const totalPages = props.totalPage || 1;
+    const isFirstPage = page === 0;
+    const isLastPage = page + 1 >= totalPages;
 
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
@@ -86,26 +90,89 @@ const TableCustom = (props) => {
             backgroundColor: theme.palette.background.tableHead,
             borderBottom: `1px solid ${theme.palette.custom.line}`,
             whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            padding: '8px 16px',
         },
         [`&.${tableCellClasses.body}`]: {
             whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            padding: '8px 16px',
         },
     }));
+
+    // Fungsi untuk menampilkan nomor halaman
+    const renderPageNumbers = () => {
+        const maxVisiblePages = 3;
+        let startPage, endPage;
+
+        if (totalPages <= maxVisiblePages) {
+            startPage = 1;
+            endPage = totalPages;
+        } else {
+            const maxPagesBeforeCurrent = Math.floor(maxVisiblePages / 2);
+            const maxPagesAfterCurrent = Math.ceil(maxVisiblePages / 2) - 1;
+
+            if (page + 1 <= maxPagesBeforeCurrent) {
+                startPage = 1;
+                endPage = maxVisiblePages;
+            } else if (page + 1 + maxPagesAfterCurrent >= totalPages) {
+                startPage = totalPages - maxVisiblePages + 1;
+                endPage = totalPages;
+            } else {
+                startPage = page + 1 - maxPagesBeforeCurrent;
+                endPage = page + 1 + maxPagesAfterCurrent;
+            }
+        }
+
+        const pages = Array.from(
+            { length: endPage - startPage + 1 },
+            (_, i) => startPage + i
+        );
+
+        return pages.map((pageNum) => (
+            <Box
+                key={pageNum}
+                component="button"
+                onClick={() => handleChangePage(null, pageNum - 1)}
+                sx={{
+                    border: "1px solid",
+                    borderColor: pageNum === page + 1 ? 'primary.main' : 'custom.line',
+                    borderRadius: 2,
+                    minWidth: 36,
+                    height: 36,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                    bgcolor: pageNum === page + 1 ? 'primary.main' : 'background.paper',
+                    color: pageNum === page + 1 ? 'primary.contrastText' : 'text.primary',
+                    fontWeight: 500,
+                    fontSize: '0.875rem',
+                    transition: 'all 0.2s ease',
+                    '&:hover': {
+                        bgcolor: pageNum === page + 1 ? 'primary.dark' : 'action.hover',
+                        borderColor: pageNum === page + 1 ? 'primary.dark' : 'text.secondary',
+                    }
+                }}
+            >
+                {pageNum}
+            </Box>
+        ));
+    };
 
     return (
         <>
             <TableContainer
                 sx={{
                     borderRadius: 2,
-                    overflowX: 'auto',
                     border: '1px solid',
                     borderColor: 'custom.line',
                     position: 'relative',
                     overflowX: 'auto',
-
                 }}
             >
-
                 <Table
                     size="small"
                     aria-label="a dense table"
@@ -118,8 +185,6 @@ const TableCustom = (props) => {
                     <TableHead
                         sx={{
                             bgcolor: 'background.tableHead',
-                            border: '1px solid',
-                            borderColor: 'custom.line',
                             borderBottom: '1px solid',
                             borderBottomColor: 'custom.line',
                             position: 'sticky',
@@ -127,34 +192,72 @@ const TableCustom = (props) => {
                             zIndex: 1,
                         }}
                     >
-                        <TableRow
-                            sx={{
-                                border: '1px solid',
-                                borderColor: 'custom.line',
-                                borderBottom: 'none'
-
-                            }}
-                        >
+                        <TableRow>
                             {props.columns.map((column) => (
                                 <StyledTableCell
                                     key={column.dataField}
                                     align={column.align || 'left'}
-                                    style={{ ...column.headerStyle }}
-                                    sortDirection={sortField === column.dataField ? sortOrder : false}
-                                    size="medium"
                                     sx={{
-                                        borderBottom: 'none'
+                                        borderBottom: 'none',
+                                        width: column.width || 'auto',
                                     }}
                                 >
                                     {column.sort ? (
-                                        <TableSortLabel
-                                            active={sortField === column.dataField}
-                                            direction={sortField === column.dataField ? sortOrder : 'asc'}
+                                        <Box
+                                            sx={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: column.align === 'center' ? 'center' :
+                                                    column.align === 'right' ? 'flex-end' : 'flex-start',
+                                                gap: 0.5,
+                                                cursor: 'pointer',
+                                                userSelect: 'none',
+                                                '&:hover': {
+                                                    color: 'primary.main',
+                                                    '& .sort-icon': {
+                                                        color: 'primary.main',
+                                                    }
+                                                }
+
+                                            }}
                                             onClick={() => handleRequestSort(null, column.dataField)}
                                         >
+                                            <Typography
+                                                variant="body2"
+                                                component="span"
+                                                fontWeight="bold"
+                                            >
+                                                {column.text}
+                                            </Typography>
+
+                                            {/* Icon Sort Section */}
+                                            <Box sx={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                ml: 0.5,
+                                                flexShrink: 0,
+                                            }}>
+                                                {sortField === column.dataField ? (
+                                                    sortOrder === 'asc' ? (
+                                                        <Icon icon={sortUp} />
+                                                    ) : (
+                                                        <Icon icon={sortDown} />
+                                                    )
+                                                ) : (
+                                                    <Icon icon={sort} />
+                                                )}
+                                            </Box>
+                                        </Box>
+                                    ) : (
+                                        <Typography
+                                            variant="body2"
+                                            component="span"
+                                            fontWeight="bold"
+                                        >
                                             {column.text}
-                                        </TableSortLabel>
-                                    ) : (column.text)}
+                                        </Typography>
+                                    )}
                                 </StyledTableCell>
                             ))}
                         </TableRow>
@@ -182,9 +285,12 @@ const TableCustom = (props) => {
                                         <StyledTableCell
                                             key={column.dataField}
                                             align={column.align || 'left'}
-                                            sx={{ borderBottom: 'none', borderTop: 'none' }}
+                                            sx={{
+                                                borderBottom: 'none',
+                                                borderTop: 'none',
+                                                width: column.width || 'auto',
+                                            }}
                                             size="small"
-                                            padding="normal"
                                         >
                                             {column.formatter ? column.formatter(value, row) : value}
                                         </StyledTableCell>
@@ -203,62 +309,164 @@ const TableCustom = (props) => {
                 </Table>
             </TableContainer>
 
-
-            <Box sx={{
-                display: "flex", alignItems: "center", justifyContent: "space-between", mt: 2, px: 1, visibility: props.loadingData ? 'hidden' : 'visible'
+             <Box sx={{
+                display: "flex",
+                flexDirection: { xs: 'column', lg: 'row' },
+                alignItems: "center",
+                justifyContent: "space-between",
+                mt: 2,
+                px: 1,
+                gap: { xs: 2, lg: 1 },
+                visibility: props.loadingData ? 'hidden' : 'visible'
             }}>
-                <Typography variant="body2">
+                <Typography variant="body2" sx={{ order: { xs: 1, lg: 1 } }}>
                     Showing {from} to {to} of {props.appdataTotal} entries
                 </Typography>
 
-                <Pagination
-                    count={props.totalPage ? props.totalPage : 1}
-                    page={page + 1}
-                    onChange={(e, value) => handleChangePage(e, value - 1)}
-                    showFirstButton
-                    showLastButton
-                    shape="rounded"
-                    renderItem={(item) => (
-                        <PaginationItem
-                            {...item}
-                            slots={{
-                                first: () => <Icon icon="mdi:chevron-double-left" width={20} height={20} />,
-                                previous: () => <Icon icon="mdi:chevron-left" width={20} height={20} />,
-                                next: () => <Icon icon="mdi:chevron-right" width={20} height={20} />,
-                                last: () => <Icon icon="mdi:chevron-double-right" width={20} height={20} />,
-                            }}
-                        />
-                    )}
-                    sx={{
-                        "& .MuiPaginationItem-root": {
-                            borderRadius: 2,
+                {/* PAGINATION SECTION */}
+                <Box sx={{ 
+                    display: "flex", 
+                    alignItems: "center", 
+                    gap: 1,
+                    order: { xs: 2, lg: 2 },
+                    flexWrap: 'wrap',
+                    justifyContent: 'center',
+                }}>
+                    {/* First Page Button (<<) */}
+                    <Box
+                        component="button"
+                        onClick={() => !isFirstPage && handleChangePage(null, 0)}
+                        sx={{
                             border: "1px solid",
                             borderColor: 'custom.line',
+                            borderRadius: 2,
                             minWidth: 36,
                             height: 36,
-                            fontWeight: 500,
-                        },
-                        "& .MuiPaginationItem-icon": {
-                            fontSize: 24,
-                        },
-                        "& .Mui-selected": {
-                            bgcolor: "primary.main",
-                            color: "primary.contrastText",
-                            borderColor: 'custom.line',
-                            "&:hover": {
-                                bgcolor: "primary.dark",
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            cursor: isFirstPage ? 'default' : 'pointer',
+                            bgcolor: 'background.paper',
+                            color: 'text.primary',
+                            transition: 'all 0.2s ease',
+                            '&:hover': !isFirstPage && {
+                                bgcolor: 'action.hover',
+                                borderColor: 'primary.main',
+                                color: 'primary.main',
                             },
-                        },
-                    }}
-                />
+                        }}
+                    >
+                        <Icon icon={chevronDoubleLeft} width={20} height={20} />
+                    </Box>
 
-                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                    {/* Previous Page Button (<) */}
+                    <Box
+                        component="button"
+                        onClick={() => !isFirstPage && handleChangePage(null, page - 1)}
+                        sx={{
+                            border: "1px solid",
+                            borderColor: 'custom.line',
+                            borderRadius: 2,
+                            minWidth: 36,
+                            height: 36,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            cursor: isFirstPage ? 'default' : 'pointer',
+                            bgcolor: 'background.paper',
+                            color: 'text.primary',
+                            transition: 'all 0.2s ease',
+                            '&:hover': !isFirstPage && {
+                                bgcolor: 'action.hover',
+                                borderColor: 'primary.main',
+                                color: 'primary.main',
+                            },
+                        }}
+                    >
+                        <Icon icon={chevronLeft} width={20} height={20} />
+                    </Box>
+
+                    {/* Page Numbers */}
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                        {renderPageNumbers()}
+                    </Box>
+
+                    {/* Next Page Button (>) */}
+                    <Box
+                        component="button"
+                        onClick={() => !isLastPage && handleChangePage(null, page + 1)}
+                        sx={{
+                            border: "1px solid",
+                            borderColor: 'custom.line',
+                            borderRadius: 2,
+                            minWidth: 36,
+                            height: 36,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            cursor: isLastPage ? 'default' : 'pointer',
+                            bgcolor: 'background.paper',
+                            color: 'text.primary',
+                            transition: 'all 0.2s ease',
+                            '&:hover': !isLastPage && {
+                                bgcolor: 'action.hover',
+                                borderColor: 'primary.main',
+                                color: 'primary.main',
+                            },
+                        }}
+                    >
+                        <Icon icon={chevronRight} width={20} height={20} />
+                    </Box>
+
+                    {/* Last Page Button (>>) */}
+                    <Box
+                        component="button"
+                        onClick={() => !isLastPage && handleChangePage(null, totalPages - 1)}
+                        sx={{
+                            border: "1px solid",
+                            borderColor: 'custom.line',
+                            borderRadius: 2,
+                            minWidth: 36,
+                            height: 36,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            cursor: isLastPage ? 'default' : 'pointer',
+                            bgcolor: 'background.paper',
+                            color: 'text.primary',
+                            transition: 'all 0.2s ease',
+                            '&:hover': !isLastPage && {
+                                bgcolor: 'action.hover',
+                                borderColor: 'primary.main',
+                                color: 'primary.main',
+                            },
+                        }}
+                    >
+                        <Icon icon={chevronDoubleRight} width={20} height={20} />
+                    </Box>
+                </Box>
+
+                {/* Show entries selector */}
+                <Box sx={{ 
+                    display: "flex", 
+                    alignItems: "center", 
+                    gap: 1,
+                    order: { xs: 3, lg: 3 },
+                }}>
                     <Typography variant="body2">Show</Typography>
                     <Select
                         size="small"
                         value={rowsPerPage}
                         onChange={handleChangeRowsPerPage}
-                        sx={{ height: 32, minWidth: 30, fontSize: 14, '& .MuiSelect-select': { padding: '4px 10px' } }}
+                        sx={{
+                            height: 32,
+                            minWidth: 60,
+                            fontSize: 14,
+                            '& .MuiSelect-select': {
+                                padding: '4px 10px',
+                                minHeight: 'auto',
+                            }
+                        }}
                     >
                         {props.rowsPerPageOption.map((opt) => (
                             <MenuItem key={opt} value={opt}>{opt}</MenuItem>
@@ -273,17 +481,14 @@ const TableCustom = (props) => {
 
 TableCustom.propTypes = {
     loadingData: PropTypes.bool.isRequired,
-
     keyField: PropTypes.string.isRequired,
     columns: PropTypes.array.isRequired,
     appdata: PropTypes.array.isRequired,
     appdataTotal: PropTypes.number.isRequired,
-
     page: PropTypes.number,
     totalPage: PropTypes.number.isRequired,
     rowsPerPage: PropTypes.number,
     rowsPerPageOption: PropTypes.array,
-
     onPageChange: PropTypes.func,
     onRowsPerPageChange: PropTypes.func,
     sortField: PropTypes.string,

@@ -21,7 +21,8 @@ const Dashboard = () => {
                 setFirstRender={setFirstRender}
             >
                 <Container
-                    maxWidth="xl"
+                    // maxWidth="xl"
+                    maxWidth={false}
                     sx={{
                         display: app001p01Page ? "block" : "none",
                         bgcolor: 'secondary.main'

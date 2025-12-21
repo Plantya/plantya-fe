@@ -12,7 +12,10 @@ const RootPageCustom = (props) => {
 
     return (
         <React.Fragment>
-            <Container disableGutters maxWidth={false}>
+            <Container
+                disableGutters
+                maxWidth={false}
+            >
                 <AlertMessage
                     msg={props.msgStateGet}
                     stateData={props.msgStateSet}

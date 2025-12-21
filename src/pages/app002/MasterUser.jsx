@@ -7,6 +7,10 @@ import { getUser } from "../../utils/ListApi";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Icon } from "@iconify/react";
+import plusIcon from "@iconify/icons-mdi/plus";
+import magnifyIcon from "@iconify/icons-mdi/magnify";
+
+
 
 const MasterUser = () => {
     const [firstRender, setFirstRender] = useState(false)
@@ -39,33 +43,35 @@ const MasterUser = () => {
             text: "User ID",
             sort: true,
             align: "center",
-            headerStyle: { textAlign: 'center', width: 'auto' }
+            // PERUBAHAN: Gunakan width untuk kontrol yang pasti
+            width: '120px',
         },
         {
             dataField: "name",
             text: "Username",
             sort: true,
             align: "center",
-            headerStyle: { textAlign: 'center', width: 'auto' },
+            width: '200px',
         },
         {
             dataField: "role",
             text: "Role",
             sort: true,
             align: "center",
-            headerStyle: { textAlign: 'center', width: 'auto' }
+            width: '120px',
         },
         {
             dataField: "email",
             text: "Email",
             sort: true,
             align: "center",
-            headerStyle: { textAlign: 'center', width: 'auto' }
+            width: '250px',
         },
         {
             dataField: "action",
             text: "Action",
-            headerStyle: { textAlign: 'center', width: 'auto' },
+            align: "center",
+            width: '150px',
             formatter: (cellContent, row) => (
                 <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
                     <IconButton aria-label="edit" size="small" onClick={() => console.log('Edit user:', row)} color="info"><EditIcon fontSize="inherit" /></IconButton>
@@ -74,6 +80,7 @@ const MasterUser = () => {
             ),
         },
     ];
+
 
     const getAllUser = useCallback(async (param) => {
         setLoadingData(true);
@@ -170,7 +177,10 @@ const MasterUser = () => {
                     }}
 
                 >
-                    <Stack spacing={2}>
+                    <Stack spacing={2}
+                        sx={{ overflowX: 'hidden' }}
+                    >
+
                         <Grid
                             container
                             size={12}
@@ -180,7 +190,7 @@ const MasterUser = () => {
                             </Typography>
                         </Grid>
 
-                        <Grid container alignItems="center">
+                        <Grid container alignItems="center" size={12}>
                             <Grid
                                 size={{ xs: 4, sm: 3 }}
                                 sx={{
@@ -228,7 +238,7 @@ const MasterUser = () => {
                                                     edge="end"
                                                     size="small"
                                                 >
-                                                    <Icon icon="mdi:magnify" width={20} />
+                                                    <Icon icon={magnifyIcon} width={20} />
                                                 </IconButton>
                                             ),
                                         }
@@ -237,7 +247,7 @@ const MasterUser = () => {
                             </Grid>
 
 
-                            <Grid size={{ xs: 4, sm: 2 }}>
+                            <Grid container size={{ xs: 4, sm: 2 }}>
                                 <Autocomplete
                                     fullWidth
                                     options={roleOptions}
@@ -281,10 +291,13 @@ const MasterUser = () => {
                                 size={{ xs: 4, sm: 7 }}
                                 justifyContent="flex-end"
                                 alignItems="center"
+                                sx={{
+                                    pl: 2
+                                }}
                             >
                                 <Button
                                     variant="contained"
-                                    startIcon={<Icon icon="mdi:plus" />}
+                                    endIcon={<Icon icon={plusIcon} />}
                                     sx={{
                                         textTransform: 'none',
                                         bgcolor: 'button.success',
@@ -302,6 +315,8 @@ const MasterUser = () => {
 
                         </Grid>
 
+
+
                         <TableCustom
                             keyField="user_id"
                             loadingData={loadingData}
@@ -309,7 +324,7 @@ const MasterUser = () => {
                             appdata={app002p01UserData}
                             appdataTotal={app002p01UserTotalData}
                             totalPage={totalPage}
-                            rowsPerPageOption={[5, 10, 20, 25]}
+                            rowsPerPageOption={[2, 10, 20, 25]}
 
                             page={app002p01UserDataParam.page - 1}
                             rowsPerPage={app002p01UserDataParam.size}

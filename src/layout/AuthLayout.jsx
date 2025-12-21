@@ -95,6 +95,7 @@ const AuthLayout = (props) => {
                     minHeight: "100vh",
                     backgroundColor: "background.default",
                     transition: "margin-left 0.3s ease",
+                    overflowX: 'hidden',
                 }}
             >
 
