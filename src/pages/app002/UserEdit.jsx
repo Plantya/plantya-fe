@@ -141,7 +141,13 @@ const UserEdit = (props) => {
                 <DialogContent dividers={scroll === "paper"}
                     sx={{
                         display: 'flex',
-                        flexDirection: 'column'
+                        flexDirection: 'column',
+                        overflowY: 'auto',
+                        '&::-webkit-scrollbar': {
+                            display: 'none',
+                        },
+                        scrollbarWidth: 'none',
+                        '-ms-overflow-style': 'none',
                     }}
                 >
                     <Stack
