@@ -1,7 +1,7 @@
 import { createTheme } from "@mui/material/styles";
 
 const baseColors = {
-  green: '#07AB0E',
+  green: '#007C4F',
   red: '#DC3545',
   blue: '#1976D2',
   darkBlue: '#24427D',

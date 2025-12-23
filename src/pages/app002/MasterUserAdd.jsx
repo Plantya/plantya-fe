@@ -292,7 +292,7 @@ const MasterUserAdd = (props) => {
                 />
               </Box>
 
-              <DialogActions sx={{ justifyContent: 'center', gap: 2, p: 0 }}  >
+              <DialogActions sx={{ justifyContent: 'center', gap: 2, p: 0, mt: 2 }}  >
                 <Button
                   color="main"
                   variant="contained"
@@ -312,14 +312,13 @@ const MasterUserAdd = (props) => {
                 </Button>
                 <Button
                   type="submit"
+                  color="success"
                   variant="contained"
                   fullWidth
                   sx={{
                     minHeight: '50px',
                     borderRadius: '15px',
-                    bgcolor: 'button.success',
                     '&:hover': {
-                      bgcolor: 'button.success',
                       opacity: 0.9,
                     },
                   }}
@@ -330,6 +329,7 @@ const MasterUserAdd = (props) => {
 
 
             </Box>
+
           </Stack>
         </DialogContent>
       </Dialog>

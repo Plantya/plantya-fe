@@ -326,12 +326,11 @@ const MasterUser = () => {
                             >
                                 <Button
                                     variant="contained"
+                                    color="success"
                                     endIcon={<Icon icon={plusIcon} />}
                                     sx={{
                                         textTransform: 'none',
-                                        bgcolor: 'button.success',
                                         '&:hover': {
-                                            bgcolor: 'button.success',
                                             opacity: 0.9,
                                         },
                                     }}
