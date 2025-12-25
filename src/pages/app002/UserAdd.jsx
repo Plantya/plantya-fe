@@ -133,7 +133,13 @@ const UserAdd = (props) => {
         <DialogContent dividers={scroll === "paper"}
           sx={{
             display: 'flex',
-            flexDirection: 'column'
+            flexDirection: 'column',
+            overflowY: 'auto',
+            '&::-webkit-scrollbar': {
+              display: 'none',
+            },
+            scrollbarWidth: 'none',
+            '-ms-overflow-style': 'none',
           }}
         >
           <Stack
@@ -197,7 +203,7 @@ const UserAdd = (props) => {
                               color: app002p02ValidInput.values.email === "" ? 'text.secondary' : 'text.primary'
                             }}
                           />
-                          
+
                         </InputAdornment>
                       ),
                     },
@@ -271,10 +277,10 @@ const UserAdd = (props) => {
                           startAdornment: (
                             <InputAdornment position="start">
                               <AdminPanelSettingsIcon
-                                fontSize="small"
-                                sx={{ color: 'text.secondary' }}
+                                sx={{
+                                  color: app002p02ValidInput.values.role ? 'text.primary' : 'text.secondary'
+                                }}
                               />
-                              {params.InputProps.startAdornment}
                             </InputAdornment>
                           ),
                         },
@@ -311,7 +317,7 @@ const UserAdd = (props) => {
                     minHeight: '50px',
                     borderRadius: '15px',
                     '&:hover': {
-                      opacity: 0.9,
+                      bgcolor:'#61A05A'
                     },
                   }}
                 >

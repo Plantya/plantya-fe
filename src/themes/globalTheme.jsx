@@ -24,7 +24,7 @@ const globalTheme = createTheme({
   },
   palette: {
     primary: {
-      main: baseColors.darkBlue
+      main: baseColors.green,
     },
     secondary: {
       main: baseColors.black,
@@ -113,7 +113,7 @@ const globalTheme = createTheme({
               },
 
               "&:hover:not(.Mui-disabled)": {
-                backgroundColor: "transparent !important",
+                // backgroundColor: "transparent !important",
 
                 "& fieldset": {
                   borderColor: theme.palette.custom.line,
@@ -121,7 +121,7 @@ const globalTheme = createTheme({
                 },
               },
               "&.Mui-focused": {
-                backgroundColor: "transparent !important",
+                // backgroundColor: "transparent !important",
 
                 "& fieldset": {
                   borderColor: theme.palette.custom.line,

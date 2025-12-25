@@ -1,25 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Dialog, DialogContent, Typography, Box, Backdrop, Stack, DialogActions, Button, DialogTitle, DialogContentText } from "@mui/material";
-import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import ErrorIcon from '@mui/icons-material/Error';
+import ReplayIcon from '@mui/icons-material/Replay';
 import FormSpinner from "./FormSpinner";
 
-const PopupDelete = (props) => {
+const PopupDeleteandRestore = (props) => {
 
-    const handleDelete = () => {
-        if (props.onDeleteClick) {
-            props.onDeleteClick()
+    const handleClick = () => {
+        if (props.onClick) {
+            props.onClick()
         }
     }
 
     return (
         <React.Fragment>
             <Dialog
-                open={props.modalDeleteOpen}
+                open={props.modalOpen}
                 onClose={(event, reason) => {
                     if (reason === 'backdropClick') return;
-                    props.modalDeleteClose
+                    props.modalClose
                 }}
                 fullWidth={true}
                 maxWidth={"sm"}
@@ -31,7 +31,7 @@ const PopupDelete = (props) => {
                 }}
             >
                 <FormSpinner
-                    open={props.loadingDelete}
+                    open={props.loading}
                     text={'Processing...'}
                 />
                 <DialogTitle
@@ -42,21 +42,40 @@ const PopupDelete = (props) => {
                         // bgcolor: 'red'
                     }}
                 >
-                    <ErrorIcon
-                        sx={{
-                            fontSize: {
-                                xs: 70,
-                                sm: 100,
-                            },
-                        }}
-                        color="warning"
-                    />
+                    {props.status == "restore" ? (
+                        <ReplayIcon
+                            sx={{
+                                fontSize: {
+                                    xs: 70,
+                                    sm: 100,
+                                },
+                            }}
+                            color="info"
+                        />
+                    ) :
+                        (<ErrorIcon
+                            sx={{
+                                fontSize: {
+                                    xs: 70,
+                                    sm: 100,
+                                },
+                            }}
+                            color="warning"
+                        />)
+                    }
+
                 </DialogTitle>
 
                 <DialogContent
                     sx={{
                         display: 'flex',
                         flexDirection: 'column',
+                        overflowY: 'auto',
+                        '&::-webkit-scrollbar': {
+                            display: 'none',
+                        },
+                        scrollbarWidth: 'none',
+                        '-ms-overflow-style': 'none',
                         // bgcolor: 'blue'
                     }}
                 >
@@ -88,7 +107,7 @@ const PopupDelete = (props) => {
                                     // bgcolor: 'grey'
 
                                 }}>
-                                Deleted data will not be permanently deleted immediately and can still be restored via the data archive menu
+                                {props.status == "restore" ? "Deleted data will not be permanently deleted immediately and can still be restored via the data archive menu" : "This action will restore the selected data and make it active again"}
                             </DialogContentText>
                         </Box>
 
@@ -108,16 +127,16 @@ const PopupDelete = (props) => {
                                             opacity: 0.9,
                                         },
                                     }}
-                                    onClick={props.modalDeleteClose}
+                                    onClick={props.modalClose}
                                 >
                                     CANCEL
                                 </Button>
                                 <Button
                                     type="submit"
-                                    color="error"
+                                    color={props.status == "restore" ? "info" : "error"}
                                     variant="contained"
                                     fullWidth
-                                    onClick={handleDelete}
+                                    onClick={handleClick}
 
                                     sx={{
                                         minHeight: '50px',
@@ -127,7 +146,7 @@ const PopupDelete = (props) => {
                                         },
                                     }}
                                 >
-                                    DELETE
+                                    {props.status == "restore" ? "RESTORE" : "DELETE"}
                                 </Button>
                             </DialogActions>
                         </Box>
@@ -143,11 +162,11 @@ const PopupDelete = (props) => {
     );
 };
 
-PopupDelete.propTypes = {
-    modalDeleteOpen: PropTypes.bool,
-    modalDeleteClose: PropTypes.any,
-    loadingDelete: PropTypes.any,
+PopupDeleteandRestore.propTypes = {
+    modalOpen: PropTypes.bool,
+    modalClose: PropTypes.any,
+    loading: PropTypes.any,
     onDelete: PropTypes.any,
 };
 
-export default PopupDelete;
+export default PopupDeleteandRestore;
