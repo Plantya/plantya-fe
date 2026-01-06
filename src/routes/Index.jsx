@@ -21,8 +21,12 @@ import {
     mdiViewDashboardOutline,
     mdiLayersTripleOutline,
     mdiAccountOutline,
-
-
+    mdiHomeThermometerOutline,
+    mdiAccessPointNetwork,
+    mdiChartBoxOutline,
+    mdiCogOutline,
+    mdiFaceAgent,
+    mdiInformationOutline,
 } from '@mdi/js';
 
 // Set all Menu 
@@ -43,38 +47,38 @@ export const appMenuStructure = [
                 text: "Master User",
                 path: "/app002/master-user",
                 component: LazyLoadRoutes(() => import("../pages/app002/MasterUser")),
-                icon: mdiAccountOutline,
+                icon: mdiAccountOutline
             },
             {
                 text: "Master Cluster",
                 path: "/app003/master-cluster",
                 component: LazyLoadRoutes(() => import("../pages/app003/MasterCluster")),
-                icon: <HouseWifi />
+                icon: mdiHomeThermometerOutline
             },
             {
                 text: "Master Device",
                 path: "/app004/master-device",
                 component: LazyLoadRoutes(() => import("../pages/app004/MasterDevice")),
-                icon: <Radar />
+                icon: mdiAccessPointNetwork
             },
         ],
     },
     {
         text: "Reports",
-        icon: <ChartColumnIncreasing />,
+        icon: mdiChartBoxOutline,
         section: "main",
         sub: [
             {
                 text: "Table",
                 path: "/testing",
                 component: "",
-                icon: <ChartColumnIncreasing />
+                icon: mdiChartBoxOutline
             },
             {
                 text: "Graph",
                 path: "/master-data/graph",
                 component: "",
-                icon: <ChartColumnIncreasing />
+                icon: mdiChartBoxOutline
             },
         ],
     },
@@ -82,21 +86,21 @@ export const appMenuStructure = [
         path: "/settings",
         component: "",
         text: "Settings",
-        icon: <Settings />,
+        icon: mdiCogOutline,
         section: "main"
     },
     {
         path: "/support",
         component: "/test",
         text: "Support",
-        icon: <LifeBuoy />,
+        icon: mdiFaceAgent,
         section: "footer"
     },
     {
         path: "/about",
         component: "",
         text: "About",
-        icon: <Info />,
+        icon: mdiInformationOutline,
         section: "footer"
     },
 ];

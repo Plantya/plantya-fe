@@ -19,7 +19,14 @@ import { getUser, deleteUser, getUserDeleted, restoreUser } from "../../utils/Li
 import UserAdd from "./UserAdd";
 import UserEdit from "./UserEdit";
 import PopupDeleteAndRestore from "../../components/common/PopupDeleteAndRestore";
-import { Trash2, SquarePen, Plus, Search, RotateCcw } from "lucide-react";
+import Icon from '@mdi/react';
+import {
+    mdiTrashCanOutline,
+    mdiSquareEditOutline,
+    mdiPlus,
+    mdiMagnify,
+    mdiRestore
+} from '@mdi/js';
 
 const MasterUser = () => {
     // State First Page, Message, and Loading Effect
@@ -83,35 +90,40 @@ const MasterUser = () => {
             dataField: "user_id",
             text: "User ID",
             sort: true,
-            align: "center",
-            width: '120px',
+            headerAlign: "center",
+            bodyAlign: "left",
+            minWidth: '100px',
         },
         {
             dataField: "name",
             text: "Name",
             sort: true,
-            align: "center",
-            width: '200px',
+            headerAlign: "center",
+            bodyAlign: "left",
+            minWidth: '100px',
         },
         {
             dataField: "role",
             text: "Role",
             sort: true,
-            align: "center",
-            width: '120px',
+            headerAlign: "center",
+            bodyAlign: "left",
+            minWidth: '100px',
         },
         {
             dataField: "email",
             text: "Email",
             sort: true,
-            align: "center",
-            width: '250px',
+            headerAlign: "center",
+            bodyAlign: "left",
+            minWidth: '100px',
         },
         {
             dataField: "action",
             text: "Action",
-            align: "center",
-            width: '150px',
+            headerAlign: "center",
+            bodyAlign: 'center',
+            minWidth: '100px',
             formatter: (cellContent, app002UserData) => (
                 <>
                     <Stack direction="row" spacing={1} justifyContent="center">
@@ -122,7 +134,7 @@ const MasterUser = () => {
                                 onClick={() => handleModalEditOpen(app002UserData)}
                                 color="info"
                             >
-                                <SquarePen size={18} />
+                                <Icon path={mdiSquareEditOutline} size={"20px"} />
                             </IconButton>
                         </Tooltip>
 
@@ -133,7 +145,7 @@ const MasterUser = () => {
                                 onClick={() => handleModalDeleteOpen(app002UserData)}
                                 color="error"
                             >
-                                <Trash2 size={18} />
+                                <Icon path={mdiTrashCanOutline} size={"20px"} />
                             </IconButton>
                         </Tooltip>
                     </Stack>
@@ -172,35 +184,35 @@ const MasterUser = () => {
             dataField: "user_id",
             text: "User ID",
             sort: true,
-            align: "center",
-            width: '120px',
+            headerAlign: "center",
+            minWidth: '120px',
         },
         {
             dataField: "name",
             text: "Name",
             sort: true,
-            align: "center",
-            width: '200px',
+            headerAlign: "center",
+            minWidth: '200px',
         },
         {
             dataField: "role",
             text: "Role",
             sort: true,
-            align: "center",
-            width: '120px',
+            headerAlign: "center",
+            minWidth: '120px',
         },
         {
             dataField: "email",
             text: "Email",
             sort: true,
-            align: "center",
-            width: '250px',
+            headerAlign: "center",
+            minWidth: '250px',
         },
         {
             dataField: "action",
             text: "Action",
-            align: "center",
-            width: '150px',
+            headerAlign: "center",
+            minWidth: '150px',
             formatter: (cellContent, app002UserDeletedData) => (
                 <>
                     <Stack direction="row" spacing={1} justifyContent="center">
@@ -211,7 +223,7 @@ const MasterUser = () => {
                                 onClick={() => handleModalRestoreOpen(app002UserDeletedData)}
                                 color="info"
                             >
-                                <RotateCcw size={18} />
+                                <Icon path={mdiRestore} size={"20px"} />
                             </IconButton>
                         </Tooltip>
                     </Stack>
@@ -550,7 +562,7 @@ const MasterUser = () => {
                                                                 color: 'text.secondary'
                                                             }}
                                                         >
-                                                            <Search size={18} />
+                                                            <Icon path={mdiMagnify} size={"28px"} />
                                                         </IconButton>
                                                     ),
                                                 }
@@ -615,7 +627,7 @@ const MasterUser = () => {
                                         <Button
                                             variant="contained"
                                             color="success"
-                                            endIcon={<Plus size={18} />}
+                                            endIcon={<Icon path={mdiPlus} size={"20px"} />}
                                             sx={{
                                                 textTransform: 'none',
                                                 '&:hover': {
@@ -710,7 +722,7 @@ const MasterUser = () => {
                                                                 color: 'text.secondary'
                                                             }}
                                                         >
-                                                            <Search size={18} />
+                                                            <Icon path={mdiMagnify} size={"28px"} />
                                                         </IconButton>
                                                     ),
                                                 }

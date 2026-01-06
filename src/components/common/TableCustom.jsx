@@ -168,10 +168,10 @@ const TableCustom = (props) => {
         return props.columns.map((column) => (
             <StyledTableCell
                 key={column.dataField}
-                align={column.align || 'left'}
+                align={column.headerAlign || 'left'}
                 sx={{
                     borderBottom: 'none',
-                    width: column.width || 'auto',
+                    minWidth: column.minWidth || 'auto',
                     padding: { xs: '8px 12px', sm: '8px 12px', md: '8px 16px' },
                 }}
             >
@@ -180,17 +180,8 @@ const TableCustom = (props) => {
                         sx={{
                             display: 'flex',
                             alignItems: 'center',
-                            justifyContent: column.align === 'center' ? 'center' :
-                                column.align === 'right' ? 'flex-end' : 'flex-start',
-                            gap: 0.5,
-                            cursor: 'pointer',
-                            userSelect: 'none',
-                            '&:hover': {
-                                color: 'primary.main',
-                                '& .sort-icon': {
-                                    color: 'primary.main',
-                                }
-                            }
+                            justifyContent: column.headerAlign === 'center' ? 'center' :
+                                column.headerAlign === 'right' ? 'flex-end' : 'flex-start',
                         }}
                         onClick={() => handleRequestSort(null, column.dataField)}
                     >
@@ -210,7 +201,6 @@ const TableCustom = (props) => {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            ml: 0.5,
                             flexShrink: 0,
                         }}>
                             {sortField === column.dataField ? (
@@ -225,16 +215,25 @@ const TableCustom = (props) => {
                         </Box>
                     </Box>
                 ) : (
-                    <Typography
-                        variant="body2"
-                        component="span"
-                        fontWeight="bold"
+                    <Box
                         sx={{
-                            fontSize: { xs: '0.75rem', sm: '0.75rem', md: '0.875rem' },
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: column.headerAlign === 'center' ? 'center' :
+                                column.headerAlign === 'right' ? 'flex-end' : 'flex-start',
                         }}
                     >
-                        {column.text}
-                    </Typography>
+                        <Typography
+                            variant="body2"
+                            component="span"
+                            fontWeight="bold"
+                            sx={{
+                                fontSize: { xs: '0.75rem', sm: '0.75rem', md: '0.875rem' },
+                            }}
+                        >
+                            {column.text}
+                        </Typography>
+                    </Box>
                 )}
             </StyledTableCell>
         ));
@@ -244,8 +243,18 @@ const TableCustom = (props) => {
     const bodyRows = useMemo(() => {
         if (props.appdata.length === 0 && !props.loadingData) {
             return (
-                <TableRow>
-                    <StyledTableCell colSpan={props.columns.length} align="center">
+                <TableRow
+                    sx={{
+                        borderBottom: '1px solid',
+                        borderColor: 'custom.line'
+                    }}
+                >
+                    <StyledTableCell colSpan={props.columns.length} align="center"
+                        sx={{
+                            borderBottom: 'none',
+                            borderTop: 'none',
+                        }}
+                    >
                         <Typography variant="body2" sx={{ fontSize: { xs: '0.75rem', sm: '0.75rem', md: '0.875rem' } }}>
                             No records to display
                         </Typography>
@@ -270,11 +279,11 @@ const TableCustom = (props) => {
                     return (
                         <StyledTableCell
                             key={column.dataField}
-                            align={column.align || 'left'}
+                            align={column.bodyAlign || 'left'}
                             sx={{
                                 borderBottom: 'none',
                                 borderTop: 'none',
-                                width: column.width || 'auto',
+                                minWidth: column.minWidth || 'auto',
                                 padding: { xs: '8px 12px', sm: '8px 12px', md: '8px 16px' },
                             }}
                             size="small"
@@ -305,8 +314,9 @@ const TableCustom = (props) => {
                     width="100%"
                     sx={{
                         border: 'none',
-                        tableLayout: 'fixed',
-                        minWidth: { xs: 600, sm: 600, md: 'auto' },
+                        tableLayout: 'auto',
+                        width: 'max-content',
+                        minWidth: '100%'
                     }}
                 >
                     <TableHead
