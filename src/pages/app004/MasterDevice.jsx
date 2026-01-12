@@ -28,7 +28,6 @@ const MasterDevice = () => {
     const [app003MsgStatus, setApp003setMsgStatus] = useState("");
     const [loadingData, setLoadingData] = useState(false);
     const [loadingDelete, setLoadingDelete] = useState(false)
-    const [loadingRestore, setLoadingRestore] = useState(false)
 
     // State Data Device, Filtering, and Param
     const [search, setSearch] = useState("")
@@ -50,10 +49,8 @@ const MasterDevice = () => {
     const [modalAddOpen, setModalAddOpen] = useState(false);
     const [modalEditOpen, setModalEditOpen] = useState(false);
     const [modalDeleteOpen, setModalDeleteOpen] = useState(false);
-    const [modalRestoreOpen, setModalRestoreOpen] = useState(false);
     const [app003DeviceEditData, setApp003DeviceEditData] = useState(null);
     const [app003DeviceDeleteData, setApp003DeviceDeleteData] = useState(null)
-    const [app003DeviceRestoreData, setApp003DeviceRestoreData] = useState(null)
 
     // Table Configuration Active Device (Header Table, Handle Page and Rows, Handle Sort)
     const app003DeviceColumns = [
