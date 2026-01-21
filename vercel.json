@@ -1,15 +1,19 @@
 {
-    "redirects": [
-        {
-            "source": "/",
-            "destination": "/plantya",
-            "permanent": true
-        }
-    ],
-    "rewrites": [
-        {
-            "source": "/plantya/(.*)",
-            "destination": "/index.html"
-        }
-    ]
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/plantya",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/plantya",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/plantya/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
