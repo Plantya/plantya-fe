@@ -3,12 +3,10 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { authProtectedRoutes, publicRoutes } from "./routes/Index";
 import AuthLayout from "./layout/AuthLayout";
 import NonAuthLayout from "./layout/NonAuthLayout";
-import { useAuth } from "./context/AuthContext";
 import AuthMiddleware from "./routes/AuthMiddleware";
+import PropTypes from 'prop-types';
 
-const App = () => {
-  const { loginStatus } = useAuth();
-
+const App = (props) => {
 
   return (
     <Routes>
@@ -16,23 +14,36 @@ const App = () => {
         <Route
           key={idx}
           path={route.path}
-          element={<NonAuthLayout>{route.component}</NonAuthLayout>}
-        />
-      ))}
-
-      {authProtectedRoutes.map((route, idx) => (
-        <Route
-          key={idx}
-          path={route.path}
           element={
-            <AuthMiddleware>
-              <AuthLayout>{route.component}</AuthLayout>
-            </AuthMiddleware>
+            <NonAuthLayout mode={props.mode} toggleTheme={props.toggleTheme}>
+              {route.component}
+            </NonAuthLayout>
           }
         />
       ))}
-    </Routes>
+
+      {
+        authProtectedRoutes.map((route, idx) => (
+          <Route
+            key={idx}
+            path={route.path}
+            element={
+              <AuthMiddleware>
+                <AuthLayout>{route.component}</AuthLayout>
+              </AuthMiddleware>
+            }
+          />
+        ))
+      }
+    </Routes >
   );
 };
+
+App.propTypes = {
+  mode: PropTypes.any,
+  toggleTheme: PropTypes.any,
+};
+
+
 
 export default App;

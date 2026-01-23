@@ -7,6 +7,7 @@ import { useTheme } from '@mui/material/styles';
 import LoginBg from "../assets/LoginBg.webp";
 import SmallIcon from "../assets/SmallIcon.png";
 import Lottie from "lottie-react";
+import PropTypes from 'prop-types';
 import nonAuthIcon from "../assets/Icon/nonAuthIcon.json"
 
 
@@ -19,7 +20,7 @@ import 'swiper/css/navigation';
 
 // import required modules
 
-const NonAuthLayout = ({ children }) => {
+const NonAuthLayout = (props) => {
     const theme = useTheme();
 
     const cardContent = [
@@ -72,8 +73,10 @@ const NonAuthLayout = ({ children }) => {
             >
                 {/* LEFT SIDE */}
                 <Box
+                    onClick={props.toggleTheme}
                     bgcolor={"background.elevated"}
                     sx={{
+                        cursor: "pointer",
                         display: {
                             xs: 'none',
                             md: 'flex'
@@ -249,11 +252,19 @@ const NonAuthLayout = ({ children }) => {
                         sx={{
                             width: '100%',
                         }}>
-                        {children}
+                        {props.children}
                     </Box>
                 </Box>
             </Paper >
         </Container >
     );
 };
+
+
+NonAuthLayout.propTypes = {
+    mode: PropTypes.any,
+    toggleTheme: PropTypes.any,
+    children: PropTypes.any,
+};
+
 export default NonAuthLayout;
