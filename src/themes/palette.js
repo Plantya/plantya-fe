@@ -59,7 +59,10 @@ const buildPalette = (mode = "dark") => {
                 ? colors.text.secondaryDark
                 : colors.text.secondaryLight,
 
-            secondaryLight: colors.text.muted,
+            secondaryLight: colors.text.secondaryLight,
+
+            dark: colors.base.black,
+            light: colors.base.white,
         },
 
         divider: isDark

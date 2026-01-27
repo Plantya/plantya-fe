@@ -124,7 +124,7 @@ const buildComponents = () => ({
             root: ({ theme }) => ({
                 "&.auth-button": {
                     backgroundColor: theme.palette.primary.main,
-                    color: theme.palette.text.primary,
+                    color: theme.palette.text.light,
                     borderRadius: 15,
                     fontWeight: 600,
 
