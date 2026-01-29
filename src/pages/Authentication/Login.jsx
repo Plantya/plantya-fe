@@ -285,8 +285,8 @@ const Login = () => {
                         fullWidth
                         className="auth-button"
                         sx={{
-                            mt: 1,
-                            minHeight: 56
+                            // mt: 1,
+                            // minHeight: 56
                         }}
                         disabled={formik.isSubmitting}
                     >
