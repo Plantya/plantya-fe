@@ -5,13 +5,15 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 
 import App from "../src/App"
 import createAppTheme from './themes';
-
 import { AuthProvider } from './context/AuthContext';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@mdi/font/css/materialdesignicons.min.css';
-import '../index.css'
-
+import '@fontsource/poppins/400.css';
+import '@fontsource/poppins/500.css';
+import '@fontsource/poppins/600.css';
+import '@fontsource/poppins/700.css';
+import './styles/index.scss'
 
 const Root = () => {
   const [mode, setMode] = useState("dark");

@@ -20,6 +20,12 @@ import { useTheme } from '@mui/material/styles';
 import { loginApi } from "../../utils/ListApi";
 import Icon from '@mdi/react';
 import { mdiEmailOutline, mdiLockOutline, mdiEyeOutline, mdiEyeOffOutline } from '@mdi/js';
+import {
+    MailOutlineOutlinedIcon,
+    LockOutlinedIcon,
+    VisibilityOutlinedIcon,
+    VisibilityOff,
+} from '@/assets/Icon/muiIcon';
 
 const Login = () => {
     const theme = useTheme();
@@ -198,15 +204,12 @@ const Login = () => {
                                 input: {
                                     spellCheck: false,
                                     startAdornment: (
-                                        <InputAdornment position="start">
-                                            <Icon
-                                                path={mdiEmailOutline}
-                                                size={1}
-                                                color={
-                                                    formik.values.username === "" ? theme.palette.text.secondaryLight : theme.palette.text.primary
-                                                }
-                                                className="mx-2"
-                                            />
+                                        <InputAdornment position="start" >
+                                            <MailOutlineOutlinedIcon
+                                                sx={{
+                                                    mx: 0.5,
+                                                    color: formik.values.username === "" ? 'text.secondary' : 'text.primary'
+                                                }} />
                                         </InputAdornment>
                                     ),
                                 },

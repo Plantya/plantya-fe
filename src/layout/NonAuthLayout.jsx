@@ -2,10 +2,13 @@ import React from "react";
 import { Box, Grid, Container, Paper, Typography, Card, CardContent, Stack, IconButton } from "@mui/material"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import Icon from "@mdi/react";
-import { mdiAccessPoint, mdiSprout, mdiChip, mdiBrain, mdiWhiteBalanceSunny } from '@mdi/js';
+import {
+    mdiAccessPoint,
+    mdiSprout,
+    mdiChip,
+    mdiBrain
+} from '@mdi/js';
 import { useTheme } from '@mui/material/styles';
-import LoginBg from "../assets/LoginBg.webp";
-import SmallIcon from "../assets/SmallIcon.png";
 import Lottie from "lottie-react";
 import PropTypes from 'prop-types';
 import nonAuthIcon from "../assets/Icon//animation/nonAuthIcon.json"
@@ -13,9 +16,6 @@ import {
     LightModeIcon,
     DarkModeIcon,
 } from '@/assets/Icon/muiIcon';
-
-
-// Import Swiper styles
 import { Pagination, Autoplay, Mousewheel, FreeMode } from 'swiper/modules'
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -30,19 +30,16 @@ const NonAuthLayout = (props) => {
     const cardContent = [
         {
             icon: mdiAccessPoint,
-            color: theme.palette.primary.main,
             title: 'Realtime Monitoring',
             desc: "Instant visibility into your plantation’s performance.",
         },
         {
             icon: mdiChip,
-            color: theme.palette.primary.main,
             title: 'Smart IoT Integration',
             desc: "A unified network of smart farming devices.",
         },
         {
             icon: mdiBrain,
-            color: theme.palette.primary.main,
             title: 'Machine Learning Insights',
             desc: "Intelligence that evolves with your crops.",
         },
@@ -232,7 +229,7 @@ const NonAuthLayout = (props) => {
                                                     px: 4
                                                 }}
                                             >
-                                                <Box display="flex" alignItems="center">
+                                                <Box display="flex" alignItems="center" color={"primary.main"}>
                                                     <Icon path={item.icon} size={1.2} color={item.color} />
                                                 </Box>
 

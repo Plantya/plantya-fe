@@ -8,6 +8,7 @@ const createAppTheme = (mode = "dark") => {
         components: buildComponents(),
         typography: {
             fontFamily: "Poppins, sans-serif",
+            fontSize: 13,
         },
     })
 }

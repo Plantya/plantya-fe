@@ -5,3 +5,4 @@ export { default as VisibilityOutlinedIcon } from '@mui/icons-material/Visibilit
 export { default as VisibilityOff } from '@mui/icons-material/VisibilityOff';
 export { default as LightModeIcon } from '@mui/icons-material/LightMode';
 export { default as DarkModeIcon } from '@mui/icons-material/DarkMode';
+export { default as IconButton } from '@mui/icons-material/DarkMode';

@@ -9,13 +9,13 @@ import {
     InputAdornment,
     Grid,
     Divider,
-    Stack
+    Stack,
+    IconButton
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import PageSpinner from "../../components/common/PageSpinner";
 import axiosInstance from "../../utils/AxiosInstance";
 import { useAuth } from "../../context/AuthContext";
-import IconButton from '@mui/material/IconButton';
 import {
     AccountCircleIcon,
     MailOutlineOutlinedIcon,
@@ -225,10 +225,12 @@ const Register = () => {
                             helperText={formik.touched.username && formik.errors.username}
                             slotProps={{
                                 input: {
+                                    spellCheck:false,
                                     startAdornment: (
-                                        <InputAdornment position="start">
+                                        <InputAdornment position="start" >
                                             <AccountCircleIcon
                                                 sx={{
+                                                    mx: 0.5,
                                                     color: formik.values.username === "" ? 'text.secondary' : 'text.primary'
                                                 }} />
                                         </InputAdornment>
@@ -265,6 +267,7 @@ const Register = () => {
                                         <InputAdornment position="start">
                                             <MailOutlineOutlinedIcon
                                                 sx={{
+                                                    mx: 0.5,
                                                     color: formik.values.email === "" ? 'text.secondary' : 'text.primary'
                                                 }} />
                                         </InputAdornment>
@@ -307,6 +310,7 @@ const Register = () => {
                                         <InputAdornment position="start">
                                             <LockOutlinedIcon
                                                 sx={{
+                                                    mx: 0.5,
                                                     color: formik.values.password === "" ? 'text.secondary' : 'text.primary'
                                                 }} />
                                         </InputAdornment>
@@ -360,6 +364,7 @@ const Register = () => {
                                         <InputAdornment position="start">
                                             <LockOutlinedIcon
                                                 sx={{
+                                                    mx: 0.5,
                                                     color: formik.values.rePassword === "" ? 'text.secondary' : 'text.primary'
                                                 }} />
                                         </InputAdornment>

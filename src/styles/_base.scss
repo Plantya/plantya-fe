@@ -1,0 +1,13 @@
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    background-color: var(--mui-palette-background-default);
+    color: var(--mui-palette-text-primary);
+
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
