@@ -78,7 +78,7 @@ const NonAuthLayout = (props) => {
                             justifyContent={"center"}
                             color={"primary.main"}
                         > */}
-                        <Icon path={mdiSprout} size={1} className="text-primary"/>
+                        <Icon path={mdiSprout} size={1} color="primary" />
                         <Typography variant="h2" fontWeight="medium" color="text.primary">Plantya</Typography>
                         {/* </Box> */}
                     </Stack>
